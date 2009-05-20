@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Tetris
 {
@@ -19,9 +20,17 @@ namespace Tetris
 	/// </summary>
 	public partial class TetrisWindow : Window
 	{
+        DispatcherTimer gameTimer = new DispatcherTimer();
+
 		public TetrisWindow()
 		{
 			InitializeComponent();
+            gameTimer.Interval = TimeSpan.FromMilliseconds(50);
+            gameTimer.Tick += new EventHandler(gameTimer_Tick);
 		}
+
+        private void gameTimer_Tick(object sender, EventArgs e)
+        {
+        }
 	}
 }
