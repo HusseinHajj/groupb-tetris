@@ -20,13 +20,27 @@ namespace Tetris
 	/// </summary>
 	public partial class TetrisWindow : Window
 	{
-        DispatcherTimer gameTimer = new DispatcherTimer();
+		public static readonly DependencyProperty ScoreProperty = DependencyProperty.Register("Score", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
+		public static readonly DependencyProperty LevelProperty = DependencyProperty.Register("Level", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(1));
         bool activePiece = false;
+		public int Score
+		{
+			get { return (int)GetValue(ScoreProperty); }
+			set { SetValue(ScoreProperty, value); }
+		}
+		public int Level
+		{
+			get { return (int)GetValue(LevelProperty); }
+			set { SetValue(LevelProperty, value); }
+		}
+
+		DispatcherTimer gameTimer = new DispatcherTimer();
+
 		public TetrisWindow()
 		{
 			InitializeComponent();
-            gameTimer.Interval = TimeSpan.FromMilliseconds(50);
-            gameTimer.Tick += new EventHandler(gameTimer_Tick);
+			gameTimer.Interval = TimeSpan.FromMilliseconds(50);
+			gameTimer.Tick += new EventHandler(gameTimer_Tick);
 		}
 
         private void gameTimer_Tick(object sender, EventArgs e)
