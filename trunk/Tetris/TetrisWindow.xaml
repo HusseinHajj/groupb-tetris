@@ -40,6 +40,7 @@
 				<TextBlock Grid.Row="4" Text="{Binding Path=Score}"/>
 				<Label Grid.Row="6" Content="Level"/>
 				<TextBlock Grid.Row="7" Text="{Binding Path=Level}"/>
+				<Button Grid.Row="8" VerticalAlignment="Center">Pause</Button>
 			</Grid>
 		</Border>
 	</Grid>
