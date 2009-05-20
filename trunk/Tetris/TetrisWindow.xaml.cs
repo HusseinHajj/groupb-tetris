@@ -21,7 +21,7 @@ namespace Tetris
 	public partial class TetrisWindow : Window
 	{
         DispatcherTimer gameTimer = new DispatcherTimer();
-
+        bool activePiece = false;
 		public TetrisWindow()
 		{
 			InitializeComponent();
@@ -31,6 +31,10 @@ namespace Tetris
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            if (!activePiece)
+            {
+
+            }
         }
 	}
 }
