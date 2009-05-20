@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Tetris
 {
 	/// <summary>
-	/// Interaction logic for Window1.xaml
+	/// Interaction logic for TetrisWindow.xaml
 	/// </summary>
-	public partial class Window1 : Window
+	public partial class TetrisWindow : Window
 	{
-		public Window1()
+		public TetrisWindow()
 		{
 			InitializeComponent();
 		}
