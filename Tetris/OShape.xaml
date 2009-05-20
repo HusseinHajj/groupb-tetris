@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Tetris.OShape"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Height="20" Width="20">
+    Height="40" Width="40">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
