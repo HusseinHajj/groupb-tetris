@@ -5,7 +5,27 @@ using System.Text;
 
 namespace Tetris
 {
-    class IShapeModel
+    class IShapeModel : Shape
     {
+        #region Shape Members
+
+        List<System.Windows.Point> Shape.points
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        void Shape.BlockCollisionDetection()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
