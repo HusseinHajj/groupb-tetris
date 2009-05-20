@@ -1,12 +1,29 @@
 ﻿<Window x:Class="Tetris.TetrisWindow"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	Title="Tetris" Height="600" Width="600">
+	Title="Tetris" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width=".7*"/>
-			<ColumnDefinition Width=".3*"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="25"/>
+			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
-		<Canvas Background="Black" x:Name="Board"/>
+		<Border CornerRadius="5" BorderBrush="Blue" BorderThickness="10">
+			<Canvas Width="200" Height="400" Background="Black" x:Name="Board"/>
+		</Border>
+		<Border Grid.Column="2" CornerRadius="5" BorderBrush="Blue" BorderThickness="10">
+			<Grid Background="Black">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Label Grid.Row="0" Foreground="White" Content="Score"/>
+				<TextBlock Grid.Row="1" Foreground="White" Text="Score"/>
+				<Label Grid.Row="2" Foreground="White" Content="Score"/>
+				<TextBlock Grid.Row="3" Foreground="White" Text="Score"/>
+			</Grid>
+		</Border>
 	</Grid>
 </Window>
