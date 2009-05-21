@@ -19,9 +19,11 @@ namespace Tetris
     /// </summary>
     public partial class LShape : UserControl, Shape
     {
+	    public int Rotation { get; set; }
         public LShape()
         {
             InitializeComponent();
+		  Rotation = 0;
         }
 
         #region Shape Members
@@ -37,6 +39,12 @@ namespace Tetris
                 throw new NotImplementedException();
             }
         }
+
+	   public void Rotate()
+	   {
+		   Rotation = (Rotation == 270) ? 0 : Rotation + 90;
+		   RenderTransform = new RotateTransform(Rotation);
+	   }
 
         public void BlockCollisionDetection()
         {

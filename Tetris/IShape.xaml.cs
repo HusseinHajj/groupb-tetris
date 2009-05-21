@@ -20,30 +20,42 @@ namespace Tetris
     public partial class IShape : UserControl, Shape
     {
         public IShapeModel Model { get; set; }
+	   public int Rotation { get; set; }
         public IShape()
         {
             InitializeComponent();
+		  Rotation = 0;
         }
 
         #region Shape Members
 
-        public List<Point> points
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+	   public void Rotate()
+	   {
+		   Rotation = (Rotation == 270) ? 0 : Rotation + 90;
+		   RenderTransform = new RotateTransform(Rotation);
+	   }
 
         public void BlockCollisionDetection()
         {
             throw new NotImplementedException();
         }
 
-        #endregion
+	   #endregion
+
+	   #region Shape Members
+
+	   public List<Point> points
+	   {
+		   get
+		   {
+			   throw new NotImplementedException();
+		   }
+		   set
+		   {
+			   throw new NotImplementedException();
+		   }
+	   }
+
+	   #endregion
     }
 }

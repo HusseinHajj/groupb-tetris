@@ -19,10 +19,11 @@ namespace Tetris
     /// </summary>
     public partial class JShape : UserControl, Shape
     {
-        public JShape Model { get; set; }
+	   public int Rotation { get; set; }
         public JShape()
         {
             InitializeComponent();
+		  Rotation = 0;
         }
 
         #region Shape Members
@@ -38,6 +39,12 @@ namespace Tetris
                 throw new NotImplementedException();
             }
         }
+
+	   public void Rotate()
+	   {
+		   Rotation = (Rotation == 270) ? 0 : Rotation + 90;
+		   RenderTransform = new RotateTransform(Rotation);
+	   }
 
         public void BlockCollisionDetection()
         {
