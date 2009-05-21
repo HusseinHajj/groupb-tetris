@@ -84,6 +84,7 @@ namespace Tetris
                     else
                     { 
                         //add code to move the piece right here
+                        Canvas.SetRight(Board.Children[child], pieceRight + 20);
                     }
                     break;
                 case Key.Left:
@@ -94,6 +95,7 @@ namespace Tetris
                     else
                     { 
                         //add code to move the piece left here
+                        Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
                     }
                     break;
                 case Key.Down:
