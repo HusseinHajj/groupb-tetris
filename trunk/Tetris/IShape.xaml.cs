@@ -19,6 +19,7 @@ namespace Tetris
     /// </summary>
     public partial class IShape : UserControl
     {
+        public IShapeModel Model { get; set; }
         public IShape()
         {
             InitializeComponent();

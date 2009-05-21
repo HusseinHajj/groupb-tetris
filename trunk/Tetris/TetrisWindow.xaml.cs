@@ -78,5 +78,22 @@ namespace Tetris
              * }
             */
         }
+
+        private void Board_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Up:
+                    break;
+                case Key.Right:
+                    break;
+                case Key.Left:
+                    break;
+                case Key.Down:
+                    break;
+                case Key.P:
+                    break;
+            }
+        }
 	}
 }
