@@ -49,35 +49,6 @@ namespace Tetris
             {
 
             }
-            
-            /*pseudocode for boundry checking. can be moved anywhere
-             * On left/right click += LeftRightEvent
-             * LeftRightevent()
-             * {
-             *      onLeftClick
-             *      if(leftClickResult.location.X < boardBoarder.Location.leftX)
-             *      {
-             *          don't allow move
-             *      }
-             *      onRightClick
-             *      if(rightClickResult.Location.X > boardBoarder.Location.rightX)
-             *      {
-             *          don't allow move
-             *      }
-             * }
-             * On rotation += RotationEvent
-             * RotationEvent()
-             * {
-             *      if(rotationResult.location.X < boardBoarder.Location.leftX)
-             *      {
-             *          item.location = item.location + (boardBoarder.Location.leftX - rotationResult.location.X)
-             *      }
-             *      else if(rotationResult.location.X > board.Boarder.Location.rightX)
-             *      {
-             *          item.location = item.location - (rotationResult.location.X - boardBoarder.Location.rightX)
-             *      }
-             * }
-            */
         }
 
         private void Board_KeyDown(object sender, KeyEventArgs e)
