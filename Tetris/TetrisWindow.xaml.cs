@@ -49,6 +49,7 @@ namespace Tetris
             {
 
             }
+            
             /*pseudocode for boundry checking. can be moved anywhere
              * On left/right click += LeftRightEvent
              * LeftRightevent()
@@ -81,13 +82,48 @@ namespace Tetris
 
         private void Board_KeyDown(object sender, KeyEventArgs e)
         {
+            double left = Canvas.GetLeft(Board);
+            double right = Canvas.GetRight(Board);
+
+            int child = Board.Children.Count - 1;
+            double pieceLeft = Canvas.GetLeft(Board.Children[child]);
+            double pieceRight = Canvas.GetRight(Board.Children[child]);
+
             switch (e.Key)
-            {
+            {//Board.Children[Board.Children.Count - 1]
                 case Key.Up:
+                    //add rotation before the check
+
+                    pieceLeft = Canvas.GetLeft(Board.Children[child]);
+                    pieceRight = Canvas.GetRight(Board.Children[child]);
+                    if (pieceLeft < left)
+                    { 
+                        Canvas.SetLeft(Board.Children[child], left);
+                    }
+                    else if (pieceRight > right)
+                    {
+                        Canvas.SetRight(Board.Children[child], right);
+                    }
                     break;
                 case Key.Right:
+                    if (pieceRight == right)
+                    {
+                        //piece will not move right
+                    }
+                    else
+                    { 
+                        //add code to move the piece right here
+                    }
                     break;
                 case Key.Left:
+                    if (pieceLeft == left)
+                    {
+                        //piece will not move left
+                    }
+                    else
+                    { 
+                        //add code to move the piece left here
+                    }
                     break;
                 case Key.Down:
                     break;
