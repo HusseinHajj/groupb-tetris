@@ -41,6 +41,8 @@ namespace Tetris
 			InitializeComponent();
 			gameTimer.Interval = TimeSpan.FromMilliseconds(50);
 			gameTimer.Tick += new EventHandler(gameTimer_Tick);
+            OShape o = new OShape();
+            Board.Children.Add(o);
 		}
 
         private void gameTimer_Tick(object sender, EventArgs e)
