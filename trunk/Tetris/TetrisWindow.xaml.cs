@@ -45,6 +45,17 @@ namespace Tetris
             Board.Children.Add(o);
 		}
 
+		public Shape GetCurrentShape()
+		{
+			return Board.Children.OfType<Shape>().ElementAt(Board.Children.Count - 1);
+		}
+
+		public List<Shape> GetStackedShapes()
+		{
+			Shape currentShape = GetCurrentShape();
+			return Board.Children.OfType<Shape>().Where(shape => shape != currentShape).ToList();
+		}
+
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             if (!activePiece)
