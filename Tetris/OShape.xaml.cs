@@ -17,11 +17,32 @@ namespace Tetris
     /// <summary>
     /// Interaction logic for OShape.xaml
     /// </summary>
-    public partial class OShape : UserControl
+    public partial class OShape : UserControl, Shape
     {
         public OShape()
         {
             InitializeComponent();
         }
+
+        #region Shape Members
+
+        public List<Point> points
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void BlockCollisionDetection()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

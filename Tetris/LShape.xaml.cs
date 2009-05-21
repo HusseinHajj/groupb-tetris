@@ -17,11 +17,32 @@ namespace Tetris
     /// <summary>
     /// Interaction logic for LShape.xaml
     /// </summary>
-    public partial class LShape : UserControl
+    public partial class LShape : UserControl, Shape
     {
         public LShape()
         {
             InitializeComponent();
         }
+
+        #region Shape Members
+
+        public List<Point> points
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void BlockCollisionDetection()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
