@@ -5,27 +5,7 @@ using System.Text;
 
 namespace Tetris
 {
-    public class JShapeModel : Shape
+    public class JShapeModel 
     {
-        #region Shape Members
-
-        public List<System.Windows.Point> points
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public void BlockCollisionDetection()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

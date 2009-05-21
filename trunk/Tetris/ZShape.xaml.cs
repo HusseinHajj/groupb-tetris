@@ -17,11 +17,32 @@ namespace Tetris
     /// <summary>
     /// Interaction logic for ZShape.xaml
     /// </summary>
-    public partial class ZShape : UserControl
+    public partial class ZShape : UserControl, Shape
     {
         public ZShape()
         {
             InitializeComponent();
         }
+
+        #region Shape Members
+
+        public List<Point> points
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void BlockCollisionDetection()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

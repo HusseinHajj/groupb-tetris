@@ -17,12 +17,33 @@ namespace Tetris
     /// <summary>
     /// Interaction logic for JShape.xaml
     /// </summary>
-    public partial class JShape : UserControl
+    public partial class JShape : UserControl, Shape
     {
         public JShape Model { get; set; }
         public JShape()
         {
             InitializeComponent();
         }
+
+        #region Shape Members
+
+        public List<Point> points
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void BlockCollisionDetection()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

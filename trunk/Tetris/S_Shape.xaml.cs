@@ -17,11 +17,32 @@ namespace Tetris
     /// <summary>
     /// Interaction logic for S_Shape.xaml
     /// </summary>
-    public partial class S_Shape : UserControl
+    public partial class S_Shape : UserControl, Shape
     {
         public S_Shape()
         {
             InitializeComponent();
         }
+
+        #region Shape Members
+
+        public List<Point> points
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void BlockCollisionDetection()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
