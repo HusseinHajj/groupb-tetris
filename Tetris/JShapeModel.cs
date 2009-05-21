@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Tetris
 {
-    class JShapeModel : Shape
+    public class JShapeModel : Shape
     {
         #region Shape Members
 

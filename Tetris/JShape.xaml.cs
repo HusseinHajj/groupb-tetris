@@ -19,6 +19,7 @@ namespace Tetris
     /// </summary>
     public partial class JShape : UserControl
     {
+        public JShape Model { get; set; }
         public JShape()
         {
             InitializeComponent();
