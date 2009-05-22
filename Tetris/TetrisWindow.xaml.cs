@@ -92,37 +92,6 @@ namespace Tetris
                     activePiece = false;
                 }
             }
-
-
-
-            /*pseudocode for boundry checking. can be moved anywhere
-             * On left/right click += LeftRightEvent
-             * LeftRightevent()
-             * {
-             *      onLeftClick
-             *      if(leftClickResult.location.X < boardBoarder.Location.leftX)
-             *      {
-             *          don't allow move
-             *      }
-             *      onRightClick
-             *      if(rightClickResult.Location.X > boardBoarder.Location.rightX)
-             *      {
-             *          don't allow move
-             *      }
-             * }
-             * On rotation += RotationEvent
-             * RotationEvent()
-             * {
-             *      if(rotationResult.location.X < boardBoarder.Location.leftX)
-             *      {
-             *          item.location = item.location + (boardBoarder.Location.leftX - rotationResult.location.X)
-             *      }
-             *      else if(rotationResult.location.X > board.Boarder.Location.rightX)
-             *      {
-             *          item.location = item.location - (rotationResult.location.X - boardBoarder.Location.rightX)
-             *      }
-             * }
-            */
         }
 
         private void GenerateNewShape()
@@ -164,32 +133,38 @@ namespace Tetris
 
         private void Board_KeyDown(object sender, KeyEventArgs e)
         {
+            int child = Board.Children.Count - 1;
+            double pieceLeft = Canvas.GetLeft(Board.Children[child]);
+            double pieceRight = Canvas.GetRight(Board.Children[child]);
+            double right = Canvas.GetRight(Board);
+            double left = Canvas.GetLeft(Board);
+
             switch (e.Key)
             {
                 case Key.Up:
                     RotateCurrentShape();
                     break;
                 case Key.Right:
-                    //if (pieceRight == right)
-                    //{
-                    //    //piece will not move right
-                    //}
-                    //else
-                    //{ 
-                    //    //add code to move the piece right here
-                    //    Canvas.SetRight(Board.Children[child], pieceRight + 20);
-                    //}
+                    if (pieceRight == right)
+                    {
+                        //piece will not move right
+                    }
+                    else
+                    { 
+                        //add code to move the piece right here
+                        Canvas.SetLeft(Board.Children[child], pieceLeft + 20);
+                    }
                     break;
                 case Key.Left:
-                    //if (pieceLeft == left)
-                    //{
-                    //    //piece will not move left
-                    //}
-                    //else
-                    //{ 
-                    //    //add code to move the piece left here
-                    //    Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
-                    //}
+                    if (pieceLeft == left)
+                    {
+                        //piece will not move left
+                    }
+                    else
+                    { 
+                        //add code to move the piece left here
+                        Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
+                    }
                     break;
                 case Key.Down:
                     break;
