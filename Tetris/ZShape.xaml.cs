@@ -30,11 +30,11 @@ namespace Tetris
         {
             get
             {
-                throw new NotImplementedException();
+                return pointsTop;
             }
             set
             {
-                throw new NotImplementedException();
+                pointsTop = new List<Point> { new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(3, 1) };
             }
         }
         public List<Point> pointsRight
@@ -45,7 +45,7 @@ namespace Tetris
             }
             set
             {
-                pointsRight = new List<Point> { new Point(2, 0), new Point(2, 1), new Point(2, 2) };
+                pointsRight = new List<Point> { new Point(2, 0), new Point(3, 1), new Point(3, 2) };
             }
         }
         public List<Point> pointsBottom
@@ -56,7 +56,7 @@ namespace Tetris
             }
             set
             {
-                pointsBottom = new List<Point> { new Point(0, 2), new Point(1, 2), new Point(2, 2) };
+                pointsBottom = new List<Point> { new Point(0, 1), new Point(1, 2), new Point(2, 2), new Point(3, 2) };
             }
         }
         public List<Point> pointsLeft
@@ -67,7 +67,7 @@ namespace Tetris
             }
             set
             {
-                pointsLeft = new List<Point> { new Point(0, 0), new Point(0, 1), new Point(0, 2) };
+                pointsLeft = new List<Point> { new Point(0, 0), new Point(0, 1), new Point(1, 2) };
             }
         }
 
