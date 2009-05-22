@@ -39,6 +39,10 @@ namespace Tetris
 		public TetrisWindow()
 		{
 			InitializeComponent();
+
+            Canvas.SetLeft(Board, 0);
+            Canvas.SetRight(Board, Board.Width);
+
 			gameTimer.Interval = TimeSpan.FromMilliseconds(50);
 			gameTimer.Tick += new EventHandler(gameTimer_Tick);
             gameTimer.Start();
@@ -128,7 +132,7 @@ namespace Tetris
         {
             int child = Board.Children.Count - 1;
             double pieceLeft = Canvas.GetLeft(Board.Children[child]);
-            double pieceRight = Canvas.GetRight(Board.Children[child]);
+            double pieceRight = Canvas.GetLeft(Board.Children[child]) + (this.GetCurrentShape() as UserControl).Width;
             double right = Canvas.GetRight(Board);
             double left = Canvas.GetLeft(Board);
 
@@ -138,7 +142,7 @@ namespace Tetris
                     RotateCurrentShape();
                     break;
                 case Key.Right:
-                    if (pieceRight == right)
+                    if (pieceRight >= right)
                     {
                         //piece will not move right
                     }
@@ -149,7 +153,7 @@ namespace Tetris
                     }
                     break;
                 case Key.Left:
-                    if (pieceLeft == left)
+                    if (pieceLeft <= left)
                     {
                         //piece will not move left
                     }
