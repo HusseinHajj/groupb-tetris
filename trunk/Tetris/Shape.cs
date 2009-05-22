@@ -8,7 +8,11 @@ namespace Tetris
 {
     public interface Shape
     {
-        List<Point> points { get; set; }
+        List<Point> pointsTop { get; set; }
+        List<Point> pointsBottom { get; set; }
+        List<Point> pointsLeft { get; set; }
+        List<Point> pointsRight { get; set; }
+        void Rotate();
         void BlockCollisionDetection();
     }
 
