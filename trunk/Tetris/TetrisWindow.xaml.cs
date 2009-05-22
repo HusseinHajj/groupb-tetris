@@ -99,32 +99,25 @@ namespace Tetris
             switch (generator.Next() % 7)
             {
                 case 0:
-                    IShape newShape = new IShape();
-                    nextShape = newShape;
+                    nextShape = new IShape();
                     break;
                 case 1:
-                    JShape newShape1 = new JShape();
-                    nextShape = newShape1;
+                    nextShape = new JShape();
                     break;
                 case 2:
-                    LShape newShape2 = new LShape();
-                    nextShape = newShape2;
+                    nextShape = new LShape();
                     break;
                 case 3:
-                    OShape newShape3 = new OShape();
-                    nextShape = newShape3;
+                    nextShape = new OShape();
                     break;
                 case 4:
-                    ZShape newShape4 = new ZShape();
-                    nextShape = newShape4;
+                    nextShape = new ZShape();
                     break;
                 case 5:
-                    S_Shape newShape5 = new S_Shape();
-                    nextShape = newShape5;
+                    nextShape = new S_Shape();
                     break;
                 case 6:
-                    TShape newShape6 = new TShape();
-                    nextShape = newShape6;
+                    nextShape = new TShape();
                     break;
             }
             Grid.SetRow(nextShape, 1);
@@ -178,7 +171,7 @@ namespace Tetris
         private void RotateCurrentShape()
         {
             currentTransform += 90;
-            Board.Children[Board.Children.Count - 1].RenderTransform = new RotateTransform(currentTransform, 30, 20);
+		  GetCurrentShape().RenderTransform = new RotateTransform(currentTransform, ((UserControl)GetCurrentShape()).ActualWidth / 2d, ((UserControl)GetCurrentShape()).ActualHeight / 2d);
         }
 	}
 }
