@@ -19,11 +19,11 @@ namespace Tetris
     /// </summary>
     public partial class LShape : UserControl, Shape
     {
-	    public int Rotation { get; set; }
+        public int Rotation { get; set; }
         public LShape()
         {
             InitializeComponent();
-		  Rotation = 0;
+            Rotation = 0;
         }
 
         #region Shape Members
@@ -32,11 +32,11 @@ namespace Tetris
         {
             get
             {
-                throw new NotImplementedException();
+                return pointsTop;
             }
             set
             {
-                throw new NotImplementedException();
+                pointsTop = new List<Point> { new Point(0, 0), new Point(1, 0), new Point(2, 2) };
             }
         }
         public List<Point> pointsRight
@@ -47,7 +47,7 @@ namespace Tetris
             }
             set
             {
-                pointsRight = new List<Point> { new Point(2, 0), new Point(2, 1), new Point(2, 2) };
+                pointsRight = new List<Point> { new Point(1, 0), new Point(1, 1), new Point(2, 2), new Point(2, 3) };
             }
         }
         public List<Point> pointsBottom
@@ -58,7 +58,7 @@ namespace Tetris
             }
             set
             {
-                pointsBottom = new List<Point> { new Point(0, 2), new Point(1, 2), new Point(2, 2) };
+                pointsBottom = new List<Point> { new Point(0, 3), new Point(0, 1), new Point(0, 2) };
             }
         }
         public List<Point> pointsLeft
@@ -69,15 +69,15 @@ namespace Tetris
             }
             set
             {
-                pointsLeft = new List<Point> { new Point(0, 0), new Point(0, 1), new Point(0, 2) };
+                pointsLeft = new List<Point> { new Point(0, 0), new Point(0, 1), new Point(0, 2), new Point(0, 3) };
             }
         }
 
-	   public void Rotate()
-	   {
-		   Rotation = (Rotation == 270) ? 0 : Rotation + 90;
-		   RenderTransform = new RotateTransform(Rotation);
-	   }
+        public void Rotate()
+        {
+            Rotation = (Rotation == 270) ? 0 : Rotation + 90;
+            RenderTransform = new RotateTransform(Rotation);
+        }
 
         public void BlockCollisionDetection()
         {
