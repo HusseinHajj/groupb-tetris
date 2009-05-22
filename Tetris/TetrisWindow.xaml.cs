@@ -54,11 +54,11 @@ namespace Tetris
 			return Board.Children[Board.Children.Count - 1];
 		}
 
-        //public List<Shape> GetStackedShapes()
-        //{
-        //    Shape currentShape = GetCurrentShape();
-        //    return Board.Children.OfType<Shape>().Where(shape => shape != currentShape).ToList();
-        //}
+		public List<Shape> GetStackedShapes()
+		{
+			Shape currentShape = GetCurrentShape() as Shape;
+			return Board.Children.OfType<Shape>().Where(shape => shape != currentShape).ToList();
+		}
 
         UIElement shapeToAdd;
         int currentY = 0;
@@ -81,7 +81,7 @@ namespace Tetris
             }
             if (activePiece)
             {
-                if (currentY + 80 <= 400)
+                if (!HitTestBottom())
                 {
                     currentY += 5;
                     Canvas.SetTop(Board.Children[Board.Children.Count - 1], currentY);
@@ -173,5 +173,10 @@ namespace Tetris
             currentTransform += 90;
 		  GetCurrentShape().RenderTransform = new RotateTransform(currentTransform, ((UserControl)GetCurrentShape()).ActualWidth / 2d, ((UserControl)GetCurrentShape()).ActualHeight / 2d);
         }
+
+	   private bool HitTestBottom()
+	   {
+		   return currentY + 80 > 400;
+	   }
 	}
 }
