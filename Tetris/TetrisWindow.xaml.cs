@@ -132,9 +132,6 @@ namespace Tetris
         {
             int child = Board.Children.Count - 1;
             double pieceLeft = Canvas.GetLeft(Board.Children[child]);
-            double pieceRight = Canvas.GetLeft(Board.Children[child]) + (this.GetCurrentShape() as UserControl).Width;
-            double right = Canvas.GetRight(Board);
-            double left = Canvas.GetLeft(Board);
 
             switch (e.Key)
             {
@@ -142,6 +139,8 @@ namespace Tetris
                     RotateCurrentShape();
                     break;
                 case Key.Right:
+                    double pieceRight = Canvas.GetLeft(Board.Children[child]) + (this.GetCurrentShape() as UserControl).Width;
+                    double right = Canvas.GetRight(Board);
                     if (pieceRight >= right)
                     {
                         //piece will not move right
@@ -153,6 +152,8 @@ namespace Tetris
                     }
                     break;
                 case Key.Left:
+                    
+                    double left = Canvas.GetLeft(Board);
                     if (pieceLeft <= left)
                     {
                         //piece will not move left
@@ -171,7 +172,7 @@ namespace Tetris
         }
 
         int currentTransform = 0;
-
+        
         private void RotateCurrentShape()
         {
             currentTransform += 90;
