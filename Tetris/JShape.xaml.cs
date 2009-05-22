@@ -28,7 +28,7 @@ namespace Tetris
 
         #region Shape Members
 
-        public List<Point> points
+        public List<Point> pointsTop
         {
             get
             {
@@ -37,6 +37,39 @@ namespace Tetris
             set
             {
                 throw new NotImplementedException();
+            }
+        }
+        public List<Point> pointsRight
+        {
+            get
+            {
+                return pointsRight;
+            }
+            set
+            {
+                pointsRight = new List<Point> { new Point(2, 0), new Point(2, 1), new Point(2, 2) };
+            }
+        }
+        public List<Point> pointsBottom
+        {
+            get
+            {
+                return pointsBottom;
+            }
+            set
+            {
+                pointsBottom = new List<Point> { new Point(0, 2), new Point(1, 2), new Point(2, 2) };
+            }
+        }
+        public List<Point> pointsLeft
+        {
+            get
+            {
+                return pointsLeft;
+            }
+            set
+            {
+                pointsLeft = new List<Point> { new Point(0, 0), new Point(0, 1), new Point(0, 2) };
             }
         }
 
