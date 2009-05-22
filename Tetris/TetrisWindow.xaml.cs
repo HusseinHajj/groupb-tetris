@@ -165,6 +165,7 @@ namespace Tetris
                     }
                     break;
                 case Key.Down:
+				gameTimer_Tick(sender, null);
                     break;
                 case Key.P:
                     break;
@@ -179,8 +180,32 @@ namespace Tetris
 		  GetCurrentShape().RenderTransform = new RotateTransform(currentTransform, ((UserControl)GetCurrentShape()).ActualWidth / 2d, ((UserControl)GetCurrentShape()).ActualHeight / 2d);
         }
 
+	   private List<Point> GetShapePoints(Shape shape, bool top)
+	   {
+		   if (Board.Children.OfType<Shape>().Contains(shape))
+		   {
+			   UserControl shapeUC = (UserControl)shape;
+			   int angle = (shapeUC.RenderTransform is RotateTransform) ? (int)shapeUC.RenderTransform.GetValue(RotateTransform.AngleProperty) : 0;
+			   int rotation = (top) ? angle % 90 : (angle + 180) % 90;
+			   List<Point> points =
+				   rotation == 0 ? shape.pointsTop :
+				   rotation == 1 ? shape.pointsRight :
+				   rotation == 2 ? shape.pointsBottom : shape.pointsLeft;
+			   return points.Select(point => new Point(point.X + shapeUC.ActualWidth, point.Y + shapeUC.ActualHeight)).ToList();
+		   }
+		   return null;
+	   }
+
 	   private bool HitTestBottom()
 	   {
+		   //int rotation = currentTransform % 90;
+		   //List<Point> currentPoints = GetShapePoints((Shape)GetCurrentShape(), true);
+		   //List<Shape> shapes = GetStackedShapes();
+		   //foreach (Shape shape in shapes)
+		   //{
+		   //     List<Point> comparePoints = GetShapePoints(shape, false);
+
+		   //}
 		   return currentY + 80 > 400;
 	   }
 	}
