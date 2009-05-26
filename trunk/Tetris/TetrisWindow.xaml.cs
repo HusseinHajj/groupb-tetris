@@ -105,6 +105,7 @@ namespace Tetris
                 {
                     currentY = 0;
                     activePiece = false;
+				AddShapeToBoard(GetCurrentShape() as Shape);
                 }
             }
             LevelUp = 10;
@@ -228,12 +229,16 @@ namespace Tetris
 
 	   private int ShapeLeftIndex(Shape shape)
 	   {
-		   return (int)(Canvas.GetLeft(shape as UIElement) / 20d);
+		   double left = Canvas.GetLeft(shape as UIElement);
+		   left = (Double.IsNaN(left)) ? 0 : left;
+		   return (int)(left / 20d);
 	   }
 
 	   private int ShapeTopIndex(Shape shape)
 	   {
-		   return (int)(Canvas.GetTop(shape as UIElement) / 20d);
+		   double top = Canvas.GetTop(shape as UIElement);
+		   top = (Double.IsNaN(top)) ? 0 : top;
+		   return (int)(top / 20d);
 	   }
 
 	   private List<Point> GetShapePoints(Shape shape, bool top)
@@ -252,18 +257,44 @@ namespace Tetris
 		   return null;
 	   }
 
+	   private bool ShapeExists(Rectangle[,] array, int col, int row)
+	   {
+		   return array[row, col] != null && array[row, col].Visibility == Visibility.Visible;
+	   }
+
+	   private void AddShapeToBoard(Shape shape)
+	   {
+		   int top = ShapeTopIndex(shape);
+		   int left = ShapeLeftIndex(shape);
+		   for (int i = 0; i < shape.Arrangement.GetLength(0); i++)
+		   {
+			   for (int j = 0; j < shape.Arrangement.GetLength(1); j++)
+			   {
+				   tetrisBoard[top + i, left + j] = shape.Arrangement[i, j];
+			   }
+		   }
+	   }
+
 	   private bool HitTestBottom()
 	   {
-		   //int rotation = currentTransform % 90;
-		   //List<Point> currentPoints = GetShapePoints((Shape)GetCurrentShape(), true);
-		   //List<Shape> shapes = GetStackedShapes();
-		   //foreach (Shape shape in shapes)
-		   //{
-		   //     List<Point> comparePoints = GetShapePoints(shape, false);
-
-		   //}
 		   Shape shape = GetCurrentShape() as Shape;
-		   return ShapeTopIndex(shape) + shape.Arrangement.GetLength(0) >= tetrisBoard.GetLength(0);
+		   if (ShapeTopIndex(shape) + shape.Arrangement.GetLength(0) < tetrisBoard.GetLength(0))
+		   {
+			   for (int i = 0; i < shape.Arrangement.GetLength(1); i++)
+			   {
+				   for (int j = shape.Arrangement.GetLength(0) - 1; j >= 0; j--)
+				   {
+					   if (ShapeExists(shape.Arrangement, i, j))
+					   {
+						   if (ShapeExists(tetrisBoard, ShapeLeftIndex(shape) + i, ShapeTopIndex(shape) + j + 1))
+							   return true;
+						   break;
+					   }
+				   }
+			   }
+			   return false;
+		   }
+		   return true;
 	   }
 
        public void Start()
