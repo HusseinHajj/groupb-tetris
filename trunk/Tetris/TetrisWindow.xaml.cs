@@ -138,47 +138,59 @@ namespace Tetris
             switch (e.Key)
             {
                 case Key.Up:
-                    RotateCurrentShape();
-                    if (needsShift == true)
+                    if (gameTimer.IsEnabled)
                     {
-                        //shift shape to correct rotation offset
-                        needsShift = false;
-                    }
-                    else
-                    {
-                        needsShift = true;
+                        RotateCurrentShape();
+                        if (needsShift == true)
+                        {
+                            //shift shape to correct rotation offset
+                            needsShift = false;
+                        }
+                        else
+                        {
+                            needsShift = true;
+                        }
                     }
                     break;
                 case Key.Right:
-                    double pieceRight = Canvas.GetLeft(Board.Children[child]) + (this.GetCurrentShape() as UserControl).Width;
-                    double right = Canvas.GetRight(Board);
-                    if (pieceRight >= right)
+                    if (gameTimer.IsEnabled)
                     {
-                        //piece will not move right
-                    }
-                    else
-                    { 
-                        //add code to move the piece right here
-                        Canvas.SetLeft(Board.Children[child], pieceLeft + 20);
+                        double pieceRight = Canvas.GetLeft(Board.Children[child]) + (this.GetCurrentShape() as UserControl).Width;
+                        double right = Canvas.GetRight(Board);
+                        if (pieceRight >= right)
+                        {
+                            //piece will not move right
+                        }
+                        else
+                        {
+                            //add code to move the piece right here
+                            Canvas.SetLeft(Board.Children[child], pieceLeft + 20);
+                        }
                     }
                     break;
                 case Key.Left:
-                    
-                    double left = Canvas.GetLeft(Board);
-                    if (pieceLeft <= left)
+                    if (gameTimer.IsEnabled)
                     {
-                        //piece will not move left
-                    }
-                    else
-                    { 
-                        //add code to move the piece left here
-                        Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
+                        double left = Canvas.GetLeft(Board);
+                        if (pieceLeft <= left)
+                        {
+                            //piece will not move left
+                        }
+                        else
+                        {
+                            //add code to move the piece left here
+                            Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
+                        }
                     }
                     break;
                 case Key.Down:
-				gameTimer_Tick(sender, null);
+                    if (gameTimer.IsEnabled)
+                    {
+                        gameTimer_Tick(sender, null);
+                    }
                     break;
                 case Key.P:
+                    Pause(PauseStatus);
                     break;
             }
         }
@@ -219,5 +231,30 @@ namespace Tetris
 		   //}
 		   return currentY + 80 > 400;
 	   }
+
+
+
+
+       public void Start()
+       {
+           gameTimer.Start();
+       }
+       public void Stop()
+       {
+           gameTimer.Stop();
+       }
+       public void Pause(TextBlock pauseStatus)
+       {
+           if (gameTimer.IsEnabled)
+           {
+               Stop();
+               pauseStatus.Visibility = Visibility.Visible;
+           }
+           else // - This will be used when we have a game over status - if (!gameOverStatus)
+           {
+               Start();
+               pauseStatus.Visibility = Visibility.Hidden;
+           }
+       }
 	}
 }
