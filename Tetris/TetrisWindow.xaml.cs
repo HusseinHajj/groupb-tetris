@@ -144,28 +144,39 @@ namespace Tetris
             switch (e.Key)
             {
                 case Key.Up:
-                    RotateCurrentShape();
+                    if (gameTimer.IsEnabled)
+                    {
+                        RotateCurrentShape();
+                    }
                     break;
                 case Key.Right:
-                    double pieceRight = Canvas.GetLeft(Board.Children[child]) + (this.GetCurrentShape() as UserControl).ActualWidth;
-                    double right = Canvas.GetRight(Board);
-                    if (pieceRight < right)
+                    if (gameTimer.IsEnabled)
                     {
-                        //add code to move the piece right here
-                        Canvas.SetLeft(Board.Children[child], pieceLeft + 20);
+                        double pieceRight = Canvas.GetLeft(Board.Children[child]) + (this.GetCurrentShape() as UserControl).ActualWidth;
+                        double right = Canvas.GetRight(Board);
+                        if (pieceRight < right)
+                        {
+                            //add code to move the piece right here
+                            Canvas.SetLeft(Board.Children[child], pieceLeft + 20);
+                        }
                     }
                     break;
                 case Key.Left:
-                    double left = Canvas.GetLeft(Board);
-                    if (pieceLeft > left)
+                    if (gameTimer.IsEnabled)
                     {
-                        //add code to move the piece left here
-                        Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
+                        double left = Canvas.GetLeft(Board);
+                        if (pieceLeft > left)
+                        {
+                            //add code to move the piece left here
+                            Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
+                        }
                     }
                     break;
                 case Key.Down:
-
-				gameTimer_Tick(sender, null);
+                    if (gameTimer.IsEnabled)
+                    {
+                        gameTimer_Tick(sender, null);
+                    }
                     break;
                 case Key.P:
                     break;
