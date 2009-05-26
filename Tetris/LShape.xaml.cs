@@ -14,76 +14,71 @@ using System.Windows.Shapes;
 
 namespace Tetris
 {
-    /// <summary>
-    /// Interaction logic for LShape.xaml
-    /// </summary>
-    public partial class LShape : UserControl, Shape
-    {
-        public int Rotation { get; set; }
-        public LShape()
-        {
-            InitializeComponent();
-            Rotation = 0;
-        }
+	/// <summary>
+	/// Interaction logic for LShape.xaml
+	/// </summary>
+	public partial class LShape : UserControl, Shape
+	{
+		public LShape()
+		{
+			InitializeComponent();
 
-        #region Shape Members
+			Arrangement = new Rectangle[,] {
+				{ GridRoot.Children[0] as Rectangle, null },
+				{ GridRoot.Children[3] as Rectangle, null },
+				{ GridRoot.Children[2] as Rectangle, GridRoot.Children[1] as Rectangle}
+			};
+		}
 
-        public List<Point> pointsTop
-        {
-            get
-            {
-                return pointsTop;
-            }
-            set
-            {
-                pointsTop = new List<Point> { new Point(0, 0), new Point(1, 0), new Point(2, 2) };
-            }
-        }
-        public List<Point> pointsRight
-        {
-            get
-            {
-                return pointsRight;
-            }
-            set
-            {
-                pointsRight = new List<Point> { new Point(1, 0), new Point(1, 1), new Point(2, 2), new Point(2, 3) };
-            }
-        }
-        public List<Point> pointsBottom
-        {
-            get
-            {
-                return pointsBottom;
-            }
-            set
-            {
-                pointsBottom = new List<Point> { new Point(0, 3), new Point(0, 1), new Point(0, 2) };
-            }
-        }
-        public List<Point> pointsLeft
-        {
-            get
-            {
-                return pointsLeft;
-            }
-            set
-            {
-                pointsLeft = new List<Point> { new Point(0, 0), new Point(0, 1), new Point(0, 2), new Point(0, 3) };
-            }
-        }
+		#region Shape Members
 
-        public void Rotate()
-        {
-            Rotation = (Rotation == 270) ? 0 : Rotation + 90;
-            RenderTransform = new RotateTransform(Rotation);
-        }
+		public List<Point> pointsTop
+		{
+			get
+			{
+				return pointsTop;
+			}
+			set
+			{
+				pointsTop = new List<Point> { new Point(0, 0), new Point(1, 0), new Point(2, 2) };
+			}
+		}
+		public List<Point> pointsRight
+		{
+			get
+			{
+				return pointsRight;
+			}
+			set
+			{
+				pointsRight = new List<Point> { new Point(1, 0), new Point(1, 1), new Point(2, 2), new Point(2, 3) };
+			}
+		}
+		public List<Point> pointsBottom
+		{
+			get
+			{
+				return pointsBottom;
+			}
+			set
+			{
+				pointsBottom = new List<Point> { new Point(0, 3), new Point(0, 1), new Point(0, 2) };
+			}
+		}
+		public List<Point> pointsLeft
+		{
+			get
+			{
+				return pointsLeft;
+			}
+			set
+			{
+				pointsLeft = new List<Point> { new Point(0, 0), new Point(0, 1), new Point(0, 2), new Point(0, 3) };
+			}
+		}
 
-        public void BlockCollisionDetection()
-        {
-            throw new NotImplementedException();
-        }
+		public Rectangle[,] Arrangement { get; set; }
 
-        #endregion
-    }
+		#endregion
+	}
 }
