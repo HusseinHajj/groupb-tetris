@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace Tetris
 {
@@ -12,8 +13,7 @@ namespace Tetris
         List<Point> pointsBottom { get; set; }
         List<Point> pointsLeft { get; set; }
         List<Point> pointsRight { get; set; }
-        void Rotate();
-        void BlockCollisionDetection();
+	   Rectangle[,] Arrangement { get; set; }
     }
 
 }
