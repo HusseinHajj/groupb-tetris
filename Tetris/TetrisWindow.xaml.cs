@@ -91,6 +91,8 @@ namespace Tetris
             }
             if (activePiece)
             {
+                if (keyDownPressed)
+                    currentY += 10;
                 if (!HitTestBottom())
                 {
                     currentY += 5;
@@ -175,13 +177,15 @@ namespace Tetris
                 case Key.Down:
                     if (gameTimer.IsEnabled)
                     {
-                        gameTimer_Tick(sender, null);
+                        keyDownPressed = true;
                     }
                     break;
                 case Key.P:
                     break;
             }
         }
+
+        bool keyDownPressed = false;
 
         int currentTransform = 0;
         
@@ -219,5 +223,34 @@ namespace Tetris
 		   //}
 		   return currentY + 5 + (this.GetCurrentShape() as UserControl).Height > 400;
 	   }
+
+       public void Start()
+       {
+           gameTimer.Start();
+       }
+       public void Stop()
+       {
+           gameTimer.Stop();
+       }
+       public void Pause(TextBlock pauseStatus)
+       {
+           if (gameTimer.IsEnabled)
+           {
+               Stop();
+               pauseStatus.Visibility = Visibility.Visible;
+           }
+           else // - This will be used when we have a game over status - if (!gameOverStatus)
+           {
+               Start();
+               pauseStatus.Visibility = Visibility.Hidden;
+           }
+       }
+
+
+       private void Board_KeyUp(object sender, KeyEventArgs e)
+       {
+           if (e.Key == Key.Down)
+               keyDownPressed = false;
+       }
 	}
 }
