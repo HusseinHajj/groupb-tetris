@@ -98,6 +98,7 @@ namespace Tetris
             }
         }
 
+        bool needsShift;
         private void GenerateNewShape()
         {
             switch (generator.Next() % 7)
@@ -124,6 +125,7 @@ namespace Tetris
                     nextShape = new TShape();
                     break;
             }
+            needsShift = true;
             Grid.SetRow(nextShape, 1);
             Grid1.Children.Add(nextShape);
         }
@@ -137,6 +139,15 @@ namespace Tetris
             {
                 case Key.Up:
                     RotateCurrentShape();
+                    if (needsShift == true)
+                    {
+                        //shift shape to correct rotation offset
+                        needsShift = false;
+                    }
+                    else
+                    {
+                        needsShift = true;
+                    }
                     break;
                 case Key.Right:
                     double pieceRight = Canvas.GetLeft(Board.Children[child]) + (this.GetCurrentShape() as UserControl).Width;
