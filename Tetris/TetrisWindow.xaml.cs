@@ -106,7 +106,6 @@ namespace Tetris
             Score += 1;
         }
 
-        bool needsShift;
         private void GenerateNewShape()
         {
             switch (generator.Next() % 7)
@@ -133,7 +132,6 @@ namespace Tetris
                     nextShape = new TShape();
                     break;
             }
-            needsShift = true;
             Grid.SetRow(nextShape, 1);
             Grid1.Children.Add(nextShape);
         }
@@ -146,59 +144,30 @@ namespace Tetris
             switch (e.Key)
             {
                 case Key.Up:
-                    if (gameTimer.IsEnabled)
-                    {
-                        RotateCurrentShape();
-                        if (needsShift == true)
-                        {
-                            //shift shape to correct rotation offset
-                            needsShift = false;
-                        }
-                        else
-                        {
-                            needsShift = true;
-                        }
-                    }
+                    RotateCurrentShape();
                     break;
                 case Key.Right:
-                    if (gameTimer.IsEnabled)
+                    double pieceRight = Canvas.GetLeft(Board.Children[child]) + (this.GetCurrentShape() as UserControl).ActualWidth;
+                    double right = Canvas.GetRight(Board);
+                    if (pieceRight < right)
                     {
-                        double pieceRight = Canvas.GetLeft(Board.Children[child]) + (this.GetCurrentShape() as UserControl).Width;
-                        double right = Canvas.GetRight(Board);
-                        if (pieceRight >= right)
-                        {
-                            //piece will not move right
-                        }
-                        else
-                        {
-                            //add code to move the piece right here
-                            Canvas.SetLeft(Board.Children[child], pieceLeft + 20);
-                        }
+                        //add code to move the piece right here
+                        Canvas.SetLeft(Board.Children[child], pieceLeft + 20);
                     }
                     break;
                 case Key.Left:
-                    if (gameTimer.IsEnabled)
+                    double left = Canvas.GetLeft(Board);
+                    if (pieceLeft > left)
                     {
-                        double left = Canvas.GetLeft(Board);
-                        if (pieceLeft <= left)
-                        {
-                            //piece will not move left
-                        }
-                        else
-                        {
-                            //add code to move the piece left here
-                            Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
-                        }
+                        //add code to move the piece left here
+                        Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
                     }
                     break;
                 case Key.Down:
-                    if (gameTimer.IsEnabled)
-                    {
-                        gameTimer_Tick(sender, null);
-                    }
+
+				gameTimer_Tick(sender, null);
                     break;
                 case Key.P:
-                    Pause(PauseStatus);
                     break;
             }
         }
@@ -237,32 +206,7 @@ namespace Tetris
 		   //     List<Point> comparePoints = GetShapePoints(shape, false);
 
 		   //}
-		   return currentY + 80 > 400;
+		   return currentY + 5 + (this.GetCurrentShape() as UserControl).Height > 400;
 	   }
-
-
-
-
-       public void Start()
-       {
-           gameTimer.Start();
-       }
-       public void Stop()
-       {
-           gameTimer.Stop();
-       }
-       public void Pause(TextBlock pauseStatus)
-       {
-           if (gameTimer.IsEnabled)
-           {
-               Stop();
-               pauseStatus.Visibility = Visibility.Visible;
-           }
-           else // - This will be used when we have a game over status - if (!gameOverStatus)
-           {
-               Start();
-               pauseStatus.Visibility = Visibility.Hidden;
-           }
-       }
 	}
 }
