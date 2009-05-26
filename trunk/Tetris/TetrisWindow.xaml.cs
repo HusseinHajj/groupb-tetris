@@ -181,6 +181,7 @@ namespace Tetris
                     }
                     break;
                 case Key.P:
+                    Pause(PauseStatus);
                     break;
             }
         }
