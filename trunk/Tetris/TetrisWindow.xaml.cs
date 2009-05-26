@@ -40,6 +40,7 @@ namespace Tetris
             set { SetValue(LevelUpProperty, value); }
         }
 
+	   Rectangle[,] tetrisBoard;
 		DispatcherTimer gameTimer = new DispatcherTimer();
 
 		public TetrisWindow()
@@ -48,6 +49,8 @@ namespace Tetris
 
             Canvas.SetLeft(Board, 0);
             Canvas.SetRight(Board, Board.Width);
+
+		  tetrisBoard = new Rectangle[(int)(Board.Height / 20d), (int)(Board.Width / 20d)];
 
 			gameTimer.Interval = TimeSpan.FromMilliseconds(50);
 			gameTimer.Tick += new EventHandler(gameTimer_Tick);
@@ -134,6 +137,7 @@ namespace Tetris
                     nextShape = new TShape();
                     break;
             }
+		  currentTransform = 0;
             Grid.SetRow(nextShape, 1);
             Grid1.Children.Add(nextShape);
         }
@@ -192,9 +196,45 @@ namespace Tetris
         
         private void RotateCurrentShape()
         {
-            currentTransform += 90;
-		  GetCurrentShape().RenderTransform = new RotateTransform(currentTransform, ((UserControl)GetCurrentShape()).ActualWidth / 2d, ((UserControl)GetCurrentShape()).ActualHeight / 2d);
+		   RotateArrangement(GetCurrentShape() as Shape);
+		   if (!HitTestBottom())
+		   {
+			   currentTransform += 90;
+			   ((UserControl)GetCurrentShape()).LayoutTransform = new RotateTransform(currentTransform);
+		   }
+		   else
+		   {
+			   RotateArrangement(GetCurrentShape() as Shape);
+			   RotateArrangement(GetCurrentShape() as Shape);
+			   RotateArrangement(GetCurrentShape() as Shape);
+		   }
         }
+
+	   private void RotateArrangement(Shape shape)
+	   {
+		   if (shape != null)
+		   {
+			   Rectangle[,] temp = new Rectangle[shape.Arrangement.GetLength(1), shape.Arrangement.GetLength(0)];
+			   for (int i = 0; i < shape.Arrangement.GetLength(0); i++)
+			   {
+				   for (int j = 0; j < shape.Arrangement.GetLength(1); j++)
+				   {
+					   temp[j, shape.Arrangement.GetLength(0) - i - 1] = shape.Arrangement[i, j];
+				   }
+			   }
+			   shape.Arrangement = temp;
+		   }
+	   }
+
+	   private int ShapeLeftIndex(Shape shape)
+	   {
+		   return (int)(Canvas.GetLeft(shape as UIElement) / 20d);
+	   }
+
+	   private int ShapeTopIndex(Shape shape)
+	   {
+		   return (int)(Canvas.GetTop(shape as UIElement) / 20d);
+	   }
 
 	   private List<Point> GetShapePoints(Shape shape, bool top)
 	   {
@@ -222,7 +262,8 @@ namespace Tetris
 		   //     List<Point> comparePoints = GetShapePoints(shape, false);
 
 		   //}
-		   return currentY + 5 + (this.GetCurrentShape() as UserControl).Height > 400;
+		   Shape shape = GetCurrentShape() as Shape;
+		   return ShapeTopIndex(shape) + shape.Arrangement.GetLength(0) >= tetrisBoard.GetLength(0);
 	   }
 
        public void Start()
