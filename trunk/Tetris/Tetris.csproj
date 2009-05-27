@@ -96,6 +96,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Direction.cs" />
     <Compile Include="IShape.xaml.cs">
       <DependentUpon>IShape.xaml</DependentUpon>
     </Compile>
