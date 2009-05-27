@@ -64,13 +64,7 @@ namespace Tetris
 
 		public UIElement GetCurrentShape()
 		{
-			return Board.Children[Board.Children.Count - 1];
-		}
-
-		public List<Shape> GetStackedShapes()
-		{
-			Shape currentShape = GetCurrentShape() as Shape;
-			return Board.Children.OfType<Shape>().Where(shape => shape != currentShape).ToList();
+			return Board.Children.Count > 0 ? Board.Children[Board.Children.Count - 1] : null;
 		}
 
         UIElement shapeToAdd;
@@ -146,8 +140,7 @@ namespace Tetris
 
         private void Board_KeyDown(object sender, KeyEventArgs e)
         {
-            int child = Board.Children.Count - 1;
-            double pieceLeft = Canvas.GetLeft(Board.Children[child]);
+            double pieceLeft = Canvas.GetLeft(GetCurrentShape());
 
             switch (e.Key)
             {
@@ -158,30 +151,15 @@ namespace Tetris
                     }
                     break;
                 case Key.Right:
-                    if (gameTimer.IsEnabled)
+                    if (gameTimer.IsEnabled && !HitTest(Direction.Right))
                     {
-				    //double pieceRight = Canvas.GetLeft(Board.Children[child]) + (this.GetCurrentShape() as UserControl).ActualWidth;
-				    //double right = Canvas.GetRight(Board);
-				    //if (pieceRight < right)
-				    //{
-				    //    //add code to move the piece right here
-				    //    Canvas.SetLeft(Board.Children[child], pieceLeft + 20);
-				    //}
-					if(!HitTest(Direction.Right))
-						Canvas.SetLeft(Board.Children[child], pieceLeft + 20);
+				    Canvas.SetLeft(GetCurrentShape(), pieceLeft + 20);
                     }
                     break;
                 case Key.Left:
-                    if (gameTimer.IsEnabled)
+                    if (gameTimer.IsEnabled && !HitTest(Direction.Left))
                     {
-				    //double left = Canvas.GetLeft(Board);
-				    //if (pieceLeft > left)
-				    //{
-				    //    //add code to move the piece left here
-				    //    Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
-				    //}
-					if(!HitTest(Direction.Left))
-						Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
+					Canvas.SetLeft(GetCurrentShape(), pieceLeft - 20);
                     }
                     break;
                 case Key.Down:
@@ -244,22 +222,6 @@ namespace Tetris
 		   double top = Canvas.GetTop(shape as UIElement);
 		   top = (Double.IsNaN(top)) ? 0 : top;
 		   return (int)(top / 20d);
-	   }
-
-	   private List<Point> GetShapePoints(Shape shape, bool top)
-	   {
-		   if (Board.Children.OfType<Shape>().Contains(shape))
-		   {
-			   UserControl shapeUC = (UserControl)shape;
-			   int angle = (shapeUC.RenderTransform is RotateTransform) ? (int)shapeUC.RenderTransform.GetValue(RotateTransform.AngleProperty) : 0;
-			   int rotation = (top) ? angle % 90 : (angle + 180) % 90;
-			   List<Point> points =
-				   rotation == 0 ? shape.pointsTop :
-				   rotation == 1 ? shape.pointsRight :
-				   rotation == 2 ? shape.pointsBottom : shape.pointsLeft;
-			   return points.Select(point => new Point(point.X + shapeUC.ActualWidth, point.Y + shapeUC.ActualHeight)).ToList();
-		   }
-		   return null;
 	   }
 
 	   private bool ShapeExists(Rectangle[,] array, int col, int row)
