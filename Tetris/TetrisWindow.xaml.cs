@@ -89,18 +89,19 @@ namespace Tetris
             }
             if (activePiece)
             {
-			 //if (keyDownPressed)
-			 //    currentY += 10;
                 if (!HitTest(Direction.Down))
                 {
-				 currentY += (keyDownPressed) ? 10 : 5;
+                    int interval = (this.Level) * 5;
+                    interval += (keyDownPressed) ? (3 / 2) * interval : 0;
+                    currentY += interval;
+
                     Canvas.SetTop(Board.Children[Board.Children.Count - 1], currentY);
                 }
                 else
                 {
                     currentY = 0;
                     activePiece = false;
-				AddShapeToBoard(GetCurrentShape() as Shape);
+				    AddShapeToBoard(GetCurrentShape() as Shape);
                 }
             }
             LevelUp = 10;
