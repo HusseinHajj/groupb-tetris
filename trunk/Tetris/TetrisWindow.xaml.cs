@@ -89,6 +89,7 @@ namespace Tetris
                 shapeToAdd = nextShape;
                 Canvas.SetLeft(shapeToAdd, 100);
                 Board.Children.Add(shapeToAdd);
+                this.TestRowsDone();
                 GenerateNewShape();
                 activePiece = true;
             }
@@ -312,6 +313,33 @@ namespace Tetris
 		   }
 		   return true;
 	   }
+       private void TestRowsDone()
+       {
+           int row = 0;
+           while (row != 20)
+           {
+               bool rowDone = false;
+               int column = 0;
+               while (column != 10)
+               {
+                   if (ShapeExists(tetrisBoard, column, row))
+                   {
+                       rowDone = true;
+                   }
+                   else
+                   {
+                       rowDone = false;
+                       break;
+                   }
+                   column++;
+               }
+               if (rowDone == true)
+               {
+                   this.Close();
+               }
+               row++;
+           }
+       }
 
        public void Start()
        {
