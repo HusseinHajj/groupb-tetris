@@ -177,6 +177,7 @@ namespace Tetris
                             //add code to move the piece left here
                             Canvas.SetLeft(Board.Children[child], pieceLeft - 20);
                         }
+
                     }
                     break;
                 case Key.Down:
