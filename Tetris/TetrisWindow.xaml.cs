@@ -94,11 +94,11 @@ namespace Tetris
             }
             if (activePiece)
             {
-                if (keyDownPressed)
-                    currentY += 10;
+			 //if (keyDownPressed)
+			 //    currentY += 10;
                 if (!HitTestBottom())
                 {
-                    currentY += 5;
+				 currentY += (keyDownPressed) ? 20 : 5;
                     Canvas.SetTop(Board.Children[Board.Children.Count - 1], currentY);
                 }
                 else
