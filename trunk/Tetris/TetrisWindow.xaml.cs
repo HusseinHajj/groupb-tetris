@@ -15,24 +15,24 @@ using System.Windows.Threading;
 
 namespace Tetris
 {
-	/// <summary>
-	/// Interaction logic for TetrisWindow.xaml
-	/// </summary>
-	public partial class TetrisWindow : Window
-	{
-		public static readonly DependencyProperty ScoreProperty = DependencyProperty.Register("Score", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
+    /// <summary>
+    /// Interaction logic for TetrisWindow.xaml
+    /// </summary>
+    public partial class TetrisWindow : Window
+    {
+        public static readonly DependencyProperty ScoreProperty = DependencyProperty.Register("Score", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
         public static readonly DependencyProperty LevelProperty = DependencyProperty.Register("Level", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(1));
         public static readonly DependencyProperty LevelUpProperty = DependencyProperty.Register("LevelUp", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(2));
         bool activePiece = false;
-		public int Score
-		{
-			get { return (int)GetValue(ScoreProperty); }
-			set { SetValue(ScoreProperty, value); }
-		}
-		public int Level
-		{
-			get { return (int)GetValue(LevelProperty); }
-			set { SetValue(LevelProperty, value); }
+        public int Score
+        {
+            get { return (int)GetValue(ScoreProperty); }
+            set { SetValue(ScoreProperty, value); }
+        }
+        public int Level
+        {
+            get { return (int)GetValue(LevelProperty); }
+            set { SetValue(LevelProperty, value); }
         }
         public int LevelUp
         {
@@ -40,38 +40,39 @@ namespace Tetris
             set { SetValue(LevelUpProperty, value); }
         }
 
-	   Rectangle[,] tetrisBoard;
-		DispatcherTimer gameTimer = new DispatcherTimer();
+        Rectangle[,] tetrisBoard;
+        DispatcherTimer gameTimer = new DispatcherTimer();
+        bool gameOverStatus = false;
 
-		public TetrisWindow()
-		{
-			InitializeComponent();
+        public TetrisWindow()
+        {
+            InitializeComponent();
 
             Canvas.SetLeft(Board, 0);
             Canvas.SetRight(Board, Board.Width);
 
-		  tetrisBoard = new Rectangle[(int)(Board.Height / 20d), (int)(Board.Width / 20d)];
+            tetrisBoard = new Rectangle[(int)(Board.Height / 20d), (int)(Board.Width / 20d)];
 
-			gameTimer.Interval = TimeSpan.FromMilliseconds(50);
-			gameTimer.Tick += new EventHandler(gameTimer_Tick);
+            gameTimer.Interval = TimeSpan.FromMilliseconds(50);
+            gameTimer.Tick += new EventHandler(gameTimer_Tick);
             gameTimer.Start();
-		}
+        }
 
         UIElement nextShape = new UIElement();
         Random generator = new Random();
         bool nextShapeExists = false;
 
 
-		public UIElement GetCurrentShape()
-		{
-			return Board.Children[Board.Children.Count - 1];
-		}
+        public UIElement GetCurrentShape()
+        {
+            return Board.Children[Board.Children.Count - 1];
+        }
 
-		public List<Shape> GetStackedShapes()
-		{
-			Shape currentShape = GetCurrentShape() as Shape;
-			return Board.Children.OfType<Shape>().Where(shape => shape != currentShape).ToList();
-		}
+        public List<Shape> GetStackedShapes()
+        {
+            Shape currentShape = GetCurrentShape() as Shape;
+            return Board.Children.OfType<Shape>().Where(shape => shape != currentShape).ToList();
+        }
 
         UIElement shapeToAdd;
         int currentY = 0;
@@ -94,18 +95,18 @@ namespace Tetris
             }
             if (activePiece)
             {
-			 //if (keyDownPressed)
-			 //    currentY += 10;
+                //if (keyDownPressed)
+                //    currentY += 10;
                 if (!HitTestBottom())
                 {
-				 currentY += (keyDownPressed) ? 20 : 5;
+                    currentY += (keyDownPressed) ? 20 : 5;
                     Canvas.SetTop(Board.Children[Board.Children.Count - 1], currentY);
                 }
                 else
                 {
                     currentY = 0;
                     activePiece = false;
-				AddShapeToBoard(GetCurrentShape() as Shape);
+                    AddShapeToBoard(GetCurrentShape() as Shape);
                 }
             }
             LevelUp = 10;
@@ -138,7 +139,7 @@ namespace Tetris
                     nextShape = new TShape();
                     break;
             }
-		  currentTransform = 0;
+            currentTransform = 0;
             Grid.SetRow(nextShape, 1);
             Grid1.Children.Add(nextShape);
         }
@@ -195,136 +196,146 @@ namespace Tetris
         bool keyDownPressed = false;
 
         int currentTransform = 0;
-        
+
         private void RotateCurrentShape()
         {
-		   RotateArrangement(GetCurrentShape() as Shape);
-		   if (!HitTestBottom())
-		   {
-			   currentTransform += 90;
-			   ((UserControl)GetCurrentShape()).LayoutTransform = new RotateTransform(currentTransform);
-		   }
-		   else
-		   {
-			   RotateArrangement(GetCurrentShape() as Shape);
-			   RotateArrangement(GetCurrentShape() as Shape);
-			   RotateArrangement(GetCurrentShape() as Shape);
-		   }
+            RotateArrangement(GetCurrentShape() as Shape);
+            if (!HitTestBottom())
+            {
+                currentTransform += 90;
+                ((UserControl)GetCurrentShape()).LayoutTransform = new RotateTransform(currentTransform);
+            }
+            else
+            {
+                RotateArrangement(GetCurrentShape() as Shape);
+                RotateArrangement(GetCurrentShape() as Shape);
+                RotateArrangement(GetCurrentShape() as Shape);
+            }
         }
 
-	   private void RotateArrangement(Shape shape)
-	   {
-		   if (shape != null)
-		   {
-			   Rectangle[,] temp = new Rectangle[shape.Arrangement.GetLength(1), shape.Arrangement.GetLength(0)];
-			   for (int i = 0; i < shape.Arrangement.GetLength(0); i++)
-			   {
-				   for (int j = 0; j < shape.Arrangement.GetLength(1); j++)
-				   {
-					   temp[j, shape.Arrangement.GetLength(0) - i - 1] = shape.Arrangement[i, j];
-				   }
-			   }
-			   shape.Arrangement = temp;
-		   }
-	   }
+        private void RotateArrangement(Shape shape)
+        {
+            if (shape != null)
+            {
+                Rectangle[,] temp = new Rectangle[shape.Arrangement.GetLength(1), shape.Arrangement.GetLength(0)];
+                for (int i = 0; i < shape.Arrangement.GetLength(0); i++)
+                {
+                    for (int j = 0; j < shape.Arrangement.GetLength(1); j++)
+                    {
+                        temp[j, shape.Arrangement.GetLength(0) - i - 1] = shape.Arrangement[i, j];
+                    }
+                }
+                shape.Arrangement = temp;
+            }
+        }
 
-	   private int ShapeLeftIndex(Shape shape)
-	   {
-		   double left = Canvas.GetLeft(shape as UIElement);
-		   left = (Double.IsNaN(left)) ? 0 : left;
-		   return (int)(left / 20d);
-	   }
+        private int ShapeLeftIndex(Shape shape)
+        {
+            double left = Canvas.GetLeft(shape as UIElement);
+            left = (Double.IsNaN(left)) ? 0 : left;
+            return (int)(left / 20d);
+        }
 
-	   private int ShapeTopIndex(Shape shape)
-	   {
-		   double top = Canvas.GetTop(shape as UIElement);
-		   top = (Double.IsNaN(top)) ? 0 : top;
-		   return (int)(top / 20d);
-	   }
+        private int ShapeTopIndex(Shape shape)
+        {
+            double top = Canvas.GetTop(shape as UIElement);
+            top = (Double.IsNaN(top)) ? 0 : top;
+            return (int)(top / 20d);
+        }
 
-	   private List<Point> GetShapePoints(Shape shape, bool top)
-	   {
-		   if (Board.Children.OfType<Shape>().Contains(shape))
-		   {
-			   UserControl shapeUC = (UserControl)shape;
-			   int angle = (shapeUC.RenderTransform is RotateTransform) ? (int)shapeUC.RenderTransform.GetValue(RotateTransform.AngleProperty) : 0;
-			   int rotation = (top) ? angle % 90 : (angle + 180) % 90;
-			   List<Point> points =
-				   rotation == 0 ? shape.pointsTop :
-				   rotation == 1 ? shape.pointsRight :
-				   rotation == 2 ? shape.pointsBottom : shape.pointsLeft;
-			   return points.Select(point => new Point(point.X + shapeUC.ActualWidth, point.Y + shapeUC.ActualHeight)).ToList();
-		   }
-		   return null;
-	   }
+        private List<Point> GetShapePoints(Shape shape, bool top)
+        {
+            if (Board.Children.OfType<Shape>().Contains(shape))
+            {
+                UserControl shapeUC = (UserControl)shape;
+                int angle = (shapeUC.RenderTransform is RotateTransform) ? (int)shapeUC.RenderTransform.GetValue(RotateTransform.AngleProperty) : 0;
+                int rotation = (top) ? angle % 90 : (angle + 180) % 90;
+                List<Point> points =
+                    rotation == 0 ? shape.pointsTop :
+                    rotation == 1 ? shape.pointsRight :
+                    rotation == 2 ? shape.pointsBottom : shape.pointsLeft;
+                return points.Select(point => new Point(point.X + shapeUC.ActualWidth, point.Y + shapeUC.ActualHeight)).ToList();
+            }
+            return null;
+        }
 
-	   private bool ShapeExists(Rectangle[,] array, int col, int row)
-	   {
-		   return array[row, col] != null && array[row, col].Visibility == Visibility.Visible;
-	   }
+        private bool ShapeExists(Rectangle[,] array, int col, int row)
+        {
+            return array[row, col] != null && array[row, col].Visibility == Visibility.Visible;
+        }
 
-	   private void AddShapeToBoard(Shape shape)
-	   {
-		   int top = ShapeTopIndex(shape);
-		   int left = ShapeLeftIndex(shape);
-		   for (int i = 0; i < shape.Arrangement.GetLength(0); i++)
-		   {
-			   for (int j = 0; j < shape.Arrangement.GetLength(1); j++)
-			   {
-				   tetrisBoard[top + i, left + j] = shape.Arrangement[i, j];
-			   }
-		   }
-	   }
+        private void AddShapeToBoard(Shape shape)
+        {
+            int top = ShapeTopIndex(shape);
+            int left = ShapeLeftIndex(shape);
+            for (int i = 0; i < shape.Arrangement.GetLength(0); i++)
+            {
+                for (int j = 0; j < shape.Arrangement.GetLength(1); j++)
+                {
+                    tetrisBoard[top + i, left + j] = shape.Arrangement[i, j];
+                }
+            }
+        }
 
-	   private bool HitTestBottom()
-	   {
-		   Shape shape = GetCurrentShape() as Shape;
-		   if (ShapeTopIndex(shape) + shape.Arrangement.GetLength(0) < tetrisBoard.GetLength(0))
-		   {
-			   for (int i = 0; i < shape.Arrangement.GetLength(1); i++)
-			   {
-				   for (int j = shape.Arrangement.GetLength(0) - 1; j >= 0; j--)
-				   {
-					   if (ShapeExists(shape.Arrangement, i, j))
-					   {
-						   if (ShapeExists(tetrisBoard, ShapeLeftIndex(shape) + i, ShapeTopIndex(shape) + j + 1))
-							   return true;
-						   break;
-					   }
-				   }
-			   }
-			   return false;
-		   }
-		   return true;
-	   }
+        private bool HitTestBottom()
+        {
+            Shape shape = GetCurrentShape() as Shape;
+            if (ShapeTopIndex(shape) + shape.Arrangement.GetLength(0) < tetrisBoard.GetLength(0))
+            {
+                for (int i = 0; i < shape.Arrangement.GetLength(1); i++)
+                {
+                    for (int j = shape.Arrangement.GetLength(0) - 1; j >= 0; j--)
+                    {
+                        if (ShapeExists(shape.Arrangement, i, j))
+                        {
+                            if (ShapeExists(tetrisBoard, ShapeLeftIndex(shape) + i, ShapeTopIndex(shape) + j + 1))
+                                return true;
+                            break;
+                        }
+                    }
+                }
+                return false;
+            }
+            return true;
+        }
 
-       public void Start()
-       {
-           gameTimer.Start();
-       }
-       public void Stop()
-       {
-           gameTimer.Stop();
-       }
-       public void Pause(TextBlock pauseStatus)
-       {
-           if (gameTimer.IsEnabled)
-           {
-               Stop();
-               pauseStatus.Visibility = Visibility.Visible;
-           }
-           else // - This will be used when we have a game over status - if (!gameOverStatus)
-           {
-               Start();
-               pauseStatus.Visibility = Visibility.Hidden;
-           }
-       }
+        public void Start()
+        {
+            gameTimer.Start();
+        }
+        public void Stop()
+        {
+            gameTimer.Stop();
+        }
+        public void Pause(TextBlock pauseStatus)
+        {
+            if (gameTimer.IsEnabled)
+            {
+                Stop();
+                pauseStatus.Visibility = Visibility.Visible;
+            }
+            else if (!gameOverStatus)
+            {
+                Start();
+                pauseStatus.Visibility = Visibility.Hidden;
+            }
+        }
+        private void RemoveRow()
+        {
+            // - Graphic stuff will go here
+
+            // - Logic stuff will go here
+            //add to the score
+            Score += 50;
+            //remove one from the Rows to be removed for next level
+            LevelUp -= 1;
+        }
 
 
-       private void Board_KeyUp(object sender, KeyEventArgs e)
-       {
-           if (e.Key == Key.Down)
-               keyDownPressed = false;
-       }
-	}
+        private void Board_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Down)
+                keyDownPressed = false;
+        }
+    }
 }
