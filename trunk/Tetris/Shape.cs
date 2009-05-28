@@ -9,10 +9,6 @@ namespace Tetris
 {
     public interface Shape
     {
-        List<Point> pointsTop { get; set; }
-        List<Point> pointsBottom { get; set; }
-        List<Point> pointsLeft { get; set; }
-        List<Point> pointsRight { get; set; }
 	   Rectangle[,] Arrangement { get; set; }
     }
 

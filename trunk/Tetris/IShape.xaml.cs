@@ -33,52 +33,6 @@ namespace Tetris
 
 		#region Shape Members
 
-		public List<Point> pointsTop
-		{
-			get
-			{
-				return pointsTop;
-			}
-			set
-			{
-				pointsTop = new List<Point> { new Point(0, 0), new Point(1, 0) };
-			}
-		}
-
-		public List<Point> pointsRight
-		{
-			get
-			{
-				return pointsRight;
-			}
-			set
-			{
-				pointsRight = new List<Point> { new Point(1, 0), new Point(1, 1), new Point(1, 2), new Point(1, 3), new Point(1, 4) };
-			}
-		}
-		public List<Point> pointsBottom
-		{
-			get
-			{
-				return pointsBottom;
-			}
-			set
-			{
-				pointsBottom = new List<Point> { new Point(0, 4), new Point(1, 4) };
-			}
-		}
-		public List<Point> pointsLeft
-		{
-			get
-			{
-				return pointsLeft;
-			}
-			set
-			{
-				pointsLeft = new List<Point> { new Point(0, 0), new Point(0, 1), new Point(0, 2), new Point(0, 3), new Point(0, 4) };
-			}
-		}
-
 		public Rectangle[,] Arrangement { get; set; }
 
 		#endregion
