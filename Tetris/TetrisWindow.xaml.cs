@@ -246,6 +246,8 @@ namespace Tetris
         {
             int top = ShapeTopIndex(shape);
             int left = ShapeLeftIndex(shape);
+		  Canvas.SetLeft(shape as UIElement, left * 20d);
+		  Canvas.SetTop(shape as UIElement, top * 20d);
             for (int i = 0; i < shape.Arrangement.GetLength(0); i++)
             {
                 for (int j = 0; j < shape.Arrangement.GetLength(1); j++)
@@ -276,8 +278,8 @@ namespace Tetris
                         if (ShapeExists(shape.Arrangement, i, j))
                         {
                             if ((direction == Direction.Down && ShapeExists(tetrisBoard, left + i, top + j + 1)) ||
-                               (direction == Direction.Left && ShapeExists(tetrisBoard, left - 1, top + j)) ||
-                               (direction == Direction.Right && ShapeExists(tetrisBoard, left + i + 1, top + j)))
+                               (direction == Direction.Left && ShapeExists(tetrisBoard, left - 1, top + j + 1)) ||
+                               (direction == Direction.Right && ShapeExists(tetrisBoard, left + i + 1, top + j + 1)))
                                 return true;
                         }
                     }
