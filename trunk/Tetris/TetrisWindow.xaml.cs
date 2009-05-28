@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Runtime.CompilerServices;
 
 namespace Tetris
 {
@@ -107,7 +108,7 @@ namespace Tetris
                 {
                     currentY = 0;
                     activePiece = false;
-				    AddShapeToBoard(GetCurrentShape() as Shape);
+				AddShapeToBoard(GetCurrentShape() as Shape);
                 }
             }
             LevelUp = 10;
@@ -158,13 +159,13 @@ namespace Tetris
                     }
                     break;
                 case Key.Right:
-                    if (gameTimer.IsEnabled && !HitTest(Direction.Right))
+                    if (gameTimer.IsEnabled && activePiece && !HitTest(Direction.Right))
                     {
 				    Canvas.SetLeft(GetCurrentShape(), pieceLeft + 20);
                     }
                     break;
                 case Key.Left:
-                    if (gameTimer.IsEnabled && !HitTest(Direction.Left))
+                    if (gameTimer.IsEnabled && activePiece && !HitTest(Direction.Left))
                     {
 					Canvas.SetLeft(GetCurrentShape(), pieceLeft - 20);
                     }
