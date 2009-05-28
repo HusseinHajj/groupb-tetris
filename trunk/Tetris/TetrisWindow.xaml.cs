@@ -264,57 +264,53 @@ namespace Tetris
             return top >= 0 && left >= 0 && top + shape.Arrangement.GetLength(0) <= tetrisBoard.GetLength(0) && left + shape.Arrangement.GetLength(1) <= tetrisBoard.GetLength(1);
         }
 
-        private bool HitTest(Direction direction)
-        {
-            Shape shape = GetCurrentShape() as Shape;
-            int left = ShapeLeftIndex(shape);
-            int top = ShapeTopIndex(shape);
-            if (ShapeInBoundaries(shape))
-            {
-                for (int i = 0; i < shape.Arrangement.GetLength(1); i++)
-                {
-                    for (int j = 0; j < shape.Arrangement.GetLength(0); j++)
-                    {
-                        if (ShapeExists(shape.Arrangement, i, j))
-                        {
-                            if ((direction == Direction.Down && ShapeExists(tetrisBoard, left + i, top + j + 1)) ||
-                               (direction == Direction.Left && ShapeExists(tetrisBoard, left - 1, top + j + 1)) ||
-                               (direction == Direction.Right && ShapeExists(tetrisBoard, left + i + 1, top + j + 1)))
-                                return true;
-                        }
-                    }
-                }
-                return false;
-            }
-            return true;
-        }
-        private void TestRowsDone()
-        {
-            int row = 0;
-            while (row != 20)
-            {
-                bool rowDone = false;
-                int column = 0;
-                while (column != 10)
-                {
-                    if (ShapeExists(tetrisBoard, column, row))
-                    {
-                        rowDone = true;
-                    }
-                    else
-                    {
-                        rowDone = false;
-                        break;
-                    }
-                    column++;
-                }
-                if (rowDone == true)
-                {
-                    this.Close();
-                }
-                row++;
-            }
-        }
+	   private bool HitTest(Direction direction)
+	   {
+		   Shape shape = GetCurrentShape() as Shape;
+		   int left = ShapeLeftIndex(shape);
+		   int top = ShapeTopIndex(shape);
+		   if (ShapeInBoundaries(shape))
+		   {
+			   for (int i = 0; i < shape.Arrangement.GetLength(1); i++)
+			   {
+				   for (int j = 0; j < shape.Arrangement.GetLength(0); j++)
+				   {
+					   if (ShapeExists(shape.Arrangement, i, j))
+					   {
+						   if ((direction == Direction.Down && ShapeExists(tetrisBoard, left + i, top + j + 1)) || 
+							  (direction == Direction.Left && ShapeExists(tetrisBoard, left - 1, top + j)) || 
+							  (direction == Direction.Right && ShapeExists(tetrisBoard, left + i + 1, top + j)))
+							  return true;
+					   }
+				   }
+			   }
+			   return false;
+		   }
+		   return true;
+	   }
+       private void TestRowsDone()
+       {
+           int row = 19;
+           while (row != -1)
+           {
+               bool rowDone = true;
+               int column = 0;
+               while (column != 10)
+               {
+                   if (!ShapeExists(tetrisBoard, column, row))
+                   {
+                       rowDone = false;
+                       break;
+                   }
+                   column++;
+               }
+               if (rowDone == true)
+               {
+                   
+               }
+               row--;
+           }
+       }
 
         public void Start()
         {
