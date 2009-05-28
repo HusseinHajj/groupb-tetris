@@ -192,10 +192,10 @@ namespace Tetris
         private void RotateCurrentShape()
         {
             RotateArrangement(GetCurrentShape() as Shape);
-            if (!HitTest(Direction.Down) && !HitTest(Direction.Left) && !HitTest(Direction.Right))
+            if (!HitTest(Direction.Down))
             {
                 currentTransform += 90;
-                ((UserControl)GetCurrentShape()).LayoutTransform = new RotateTransform(currentTransform);
+			 ((UserControl)GetCurrentShape()).LayoutTransform = new RotateTransform(currentTransform);
             }
             else
             {
