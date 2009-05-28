@@ -100,19 +100,15 @@
     <Compile Include="IShape.xaml.cs">
       <DependentUpon>IShape.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IShapeModel.cs" />
     <Compile Include="JShape.xaml.cs">
       <DependentUpon>JShape.xaml</DependentUpon>
     </Compile>
-    <Compile Include="JShapeModel.cs" />
     <Compile Include="LShape.xaml.cs">
       <DependentUpon>LShape.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LShapeModel.cs" />
     <Compile Include="OShape.xaml.cs">
       <DependentUpon>OShape.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OShapeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -130,15 +126,12 @@
     <Compile Include="S_Shape.xaml.cs">
       <DependentUpon>S_Shape.xaml</DependentUpon>
     </Compile>
-    <Compile Include="S_ShapeModel.cs" />
     <Compile Include="TShape.xaml.cs">
       <DependentUpon>TShape.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TShapeModel.cs" />
     <Compile Include="ZShape.xaml.cs">
       <DependentUpon>ZShape.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ZShapeModel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
