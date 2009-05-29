@@ -125,7 +125,7 @@ namespace Tetris
             //Add level
             Level += 1;
             //set new levelUp property
-            LevelUp = 10 * Level;
+            LevelUp = 2 * Level;
             //add to score
             Score += 100 * Level;
         }
