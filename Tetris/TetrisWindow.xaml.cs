@@ -327,6 +327,10 @@ namespace Tetris
            }
        }
 
+	  private void VisuallyRemoveRow(int row)
+	  {
+	  }
+
         public void Start()
         {
             gameTimer.Start();
