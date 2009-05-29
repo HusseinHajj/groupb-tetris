@@ -289,6 +289,7 @@ namespace Tetris
 		   }
 		   return true;
 	   }
+
        private void TestRowsDone()
        {
            int row = 19;
@@ -310,8 +311,8 @@ namespace Tetris
                {
                    LevelUp = LevelUp - 1;
                    Score += 50 + (50 * Level);
-                   gameTimer.Stop();
-                   
+                   VisuallyRemoveRow(row);
+                   row--;
                }
                //row--;
            }
