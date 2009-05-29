@@ -91,7 +91,6 @@ namespace Tetris
             }
             if (activePiece)
             {
-                
                 if (!HitTest(Direction.Down))
                 {
                     int interval = (this.Level) * 5;
@@ -335,6 +334,7 @@ namespace Tetris
                {
                    LevelUp -= 1;
                    Score += 50 + (50 * Level);
+
 			        VisuallyRemoveRow(row);
                }
                //row--;
