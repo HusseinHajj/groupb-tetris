@@ -23,7 +23,7 @@ namespace Tetris
     {
         public static readonly DependencyProperty ScoreProperty = DependencyProperty.Register("Score", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
         public static readonly DependencyProperty LevelProperty = DependencyProperty.Register("Level", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(1));
-        public static readonly DependencyProperty LevelUpProperty = DependencyProperty.Register("LevelUp", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(2));
+        public static readonly DependencyProperty LevelUpProperty = DependencyProperty.Register("LevelUp", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(10));
         bool activePiece = false;
         public int Score
         {
@@ -73,6 +73,8 @@ namespace Tetris
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            if (LevelUp <= 0)
+                StartNewLevel();
             if (!activePiece)
             {
                 if (!nextShapeExists)
@@ -113,9 +115,19 @@ namespace Tetris
 
                 }
             }
-            LevelUp = 10;
             if (keyDownPressed)
                 Score += 1;
+        }
+
+        private void StartNewLevel()
+        {
+            //reset the board
+            //Add level
+            Level += 1;
+            //set new levelUp property
+            LevelUp = 10 * Level;
+            //add to score
+            Score += 100 * Level;
         }
 
         private void GenerateNewShape()
@@ -318,7 +330,7 @@ namespace Tetris
                }
                if (rowDone == true)
                {
-                   LevelUp = LevelUp - 1;
+                   LevelUp -= 1;
                    Score += 50 + (50 * Level);
 			        VisuallyRemoveRow(row);
                }
