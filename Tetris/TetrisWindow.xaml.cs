@@ -300,6 +300,7 @@ namespace Tetris
                    if (!ShapeExists(tetrisBoard, column, row))
                    {
                        rowDone = false;
+                       row--;
                        break;
                    }
                    column++;
@@ -309,8 +310,20 @@ namespace Tetris
                    LevelUp = LevelUp - 1;
                    Score += 50 + (50 * Level);
                    gameTimer.Stop();
+                   int secondRowCounter = row;
+                   while (secondRowCounter != 0)
+                   {
+                       int aboveSecondRow = secondRowCounter - 1;
+                       int secondColumnCounter = 0;
+                       while (secondColumnCounter != 10)
+                       {
+                           tetrisBoard[secondColumnCounter, secondRowCounter] = tetrisBoard[secondColumnCounter, aboveSecondRow];
+                           secondColumnCounter++;
+                       }
+                       secondRowCounter--;
+                   }
                }
-               row--;
+               //row--;
            }
        }
 
