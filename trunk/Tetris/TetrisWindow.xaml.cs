@@ -248,12 +248,22 @@ namespace Tetris
             int left = ShapeLeftIndex(shape);
 		  Canvas.SetLeft(shape as UIElement, left * 20d);
 		  Canvas.SetTop(shape as UIElement, top * 20d);
+		  Board.Children.Remove(shape as UIElement);
             for (int i = 0; i < shape.Arrangement.GetLength(0); i++)
             {
                 for (int j = 0; j < shape.Arrangement.GetLength(1); j++)
                 {
 				 if(shape.Arrangement[i,j] != null)
-	                    tetrisBoard[top + i, left + j] = shape.Arrangement[i, j];
+				 {
+	                    Rectangle rect = shape.Arrangement[i, j];
+					 ((Grid)((UserControl)shape).FindName("GridRoot")).Children.Remove(rect);
+					 Board.Children.Add(rect);
+					 rect.Width = 20d;
+					 rect.Height = 20d;
+					 Canvas.SetLeft(rect, 20d * (left + j));
+					 Canvas.SetTop(rect, 20d * (top + i));
+					 tetrisBoard[top + i, left + j] = rect;
+				 }
                 }
             }
         }
@@ -289,7 +299,6 @@ namespace Tetris
 		   }
 		   return true;
 	   }
-
        private void TestRowsDone()
        {
            int row = 19;
@@ -302,7 +311,7 @@ namespace Tetris
                    if (!ShapeExists(tetrisBoard, column, row))
                    {
                        rowDone = false;
-                       row--;
+                       //row--;
                        break;
                    }
                    column++;
@@ -311,18 +320,30 @@ namespace Tetris
                {
                    LevelUp = LevelUp - 1;
                    Score += 50 + (50 * Level);
-                   VisuallyRemoveRow(row);
-                   row--;
+			    VisuallyRemoveRow(row);
+                   gameTimer.Stop();
+                   
                }
-               //row--;
+               row--;
            }
        }
 
 	  private void VisuallyRemoveRow(int row)
 	  {
+		  for (int i = 0; i < tetrisBoard.GetLength(1); i++)
+		  {
+			  tetrisBoard[row, i].Visibility = Visibility.Collapsed;
+		  }
+		  for (int i = row; i >= 0; i--)
+		  {
+			  for (int j = 0; j < tetrisBoard.GetLength(1); j++)
+			  {
+				  tetrisBoard[i, j] = (i == 0) ? null : tetrisBoard[i - 1, j];
+			  }
+		  }
 	  }
 
-        public void Start()
+	  public void Start()
         {
             gameTimer.Start();
         }
