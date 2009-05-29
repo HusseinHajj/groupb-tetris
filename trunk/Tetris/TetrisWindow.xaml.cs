@@ -290,24 +290,27 @@ namespace Tetris
 	   private bool HitTest(Direction direction)
 	   {
 		   Shape shape = GetCurrentShape() as Shape;
-		   int left = ShapeLeftIndex(shape);
-		   int top = ShapeTopIndex(shape);
-		   if (ShapeInBoundaries(shape))
+		   if (shape != null)
 		   {
-			   for (int i = 0; i < shape.Arrangement.GetLength(1); i++)
+			   int left = ShapeLeftIndex(shape);
+			   int top = ShapeTopIndex(shape);
+			   if (ShapeInBoundaries(shape))
 			   {
-				   for (int j = 0; j < shape.Arrangement.GetLength(0); j++)
+				   for (int i = 0; i < shape.Arrangement.GetLength(1); i++)
 				   {
-					   if (ShapeExists(shape.Arrangement, i, j))
+					   for (int j = 0; j < shape.Arrangement.GetLength(0); j++)
 					   {
-						   if ((direction == Direction.Down && ShapeExists(tetrisBoard, left + i, top + j + 1)) || 
-							  (direction == Direction.Left && ShapeExists(tetrisBoard, left - 1, top + j)) || 
-							  (direction == Direction.Right && ShapeExists(tetrisBoard, left + i + 1, top + j)))
-							  return true;
+						   if (ShapeExists(shape.Arrangement, i, j))
+						   {
+							   if ((direction == Direction.Down && ShapeExists(tetrisBoard, left + i, top + j + 1)) ||
+								  (direction == Direction.Left && ShapeExists(tetrisBoard, left - 1, top + j)) ||
+								  (direction == Direction.Right && ShapeExists(tetrisBoard, left + i + 1, top + j)))
+								   return true;
+						   }
 					   }
 				   }
+				   return false;
 			   }
-			   return false;
 		   }
 		   return true;
 	   }
