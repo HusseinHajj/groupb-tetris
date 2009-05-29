@@ -321,8 +321,6 @@ namespace Tetris
                    LevelUp = LevelUp - 1;
                    Score += 50 + (50 * Level);
 			    VisuallyRemoveRow(row);
-                   gameTimer.Stop();
-                   
                }
                row--;
            }
@@ -339,6 +337,8 @@ namespace Tetris
 			  for (int j = 0; j < tetrisBoard.GetLength(1); j++)
 			  {
 				  tetrisBoard[i, j] = (i == 0) ? null : tetrisBoard[i - 1, j];
+				  if(tetrisBoard[i, j] != null)
+					  Canvas.SetTop(tetrisBoard[i, j], Canvas.GetTop(tetrisBoard[i, j]) + 20d);
 			  }
 		  }
 	  }
