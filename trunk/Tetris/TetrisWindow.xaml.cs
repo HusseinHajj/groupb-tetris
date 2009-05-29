@@ -84,7 +84,6 @@ namespace Tetris
                 shapeToAdd = nextShape;
                 Canvas.SetLeft(shapeToAdd, 100);
                 Board.Children.Add(shapeToAdd);
-                this.TestRowsDone();
                 GenerateNewShape();
                 activePiece = true;
             }
@@ -110,6 +109,7 @@ namespace Tetris
                     activePiece = false;
 
 				AddShapeToBoard(GetCurrentShape() as Shape);
+				this.TestRowsDone();
 
                 }
             }
@@ -252,7 +252,8 @@ namespace Tetris
             {
                 for (int j = 0; j < shape.Arrangement.GetLength(1); j++)
                 {
-                    tetrisBoard[top + i, left + j] = shape.Arrangement[i, j];
+				 if(shape.Arrangement[i,j] != null)
+	                    tetrisBoard[top + i, left + j] = shape.Arrangement[i, j];
                 }
             }
         }
