@@ -311,7 +311,7 @@ namespace Tetris
                    if (!ShapeExists(tetrisBoard, column, row))
                    {
                        rowDone = false;
-                       //row--;
+                       row--;
                        break;
                    }
                    column++;
@@ -320,9 +320,9 @@ namespace Tetris
                {
                    LevelUp = LevelUp - 1;
                    Score += 50 + (50 * Level);
-			    VisuallyRemoveRow(row);
+			        VisuallyRemoveRow(row);
                }
-               row--;
+               //row--;
            }
        }
 
