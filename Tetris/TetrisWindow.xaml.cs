@@ -285,7 +285,7 @@ namespace Tetris
         {
             int top = ShapeTopIndex(shape);
             int left = ShapeLeftIndex(shape);
-            return top >= 0 && left >= 0 && top + shape.Arrangement.GetLength(0) <= tetrisBoard.GetLength(0) && left + shape.Arrangement.GetLength(1) <= tetrisBoard.GetLength(1);
+            return left >= 0 && top + shape.Arrangement.GetLength(0) <= tetrisBoard.GetLength(0) && left + shape.Arrangement.GetLength(1) <= tetrisBoard.GetLength(1);
         }
 
 	   private bool HitTest(Direction direction)
@@ -345,7 +345,14 @@ namespace Tetris
 
 	  private void TestGameDone()
 	  {
-		  //throw new NotImplementedException();
+		  for (int i = 0; i < tetrisBoard.GetLength(1); i++)
+		  {
+			  if (ShapeExists(tetrisBoard, i, 0)) gameOverStatus = true;
+		  }
+		  if (gameOverStatus)
+		  {
+			  Stop();
+		  }
 	  }
 
 	  private void VisuallyRemoveRow(int row)
