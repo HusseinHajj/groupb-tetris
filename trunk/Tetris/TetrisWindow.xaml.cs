@@ -355,6 +355,9 @@ namespace Tetris
 		  if (gameOverStatus)
 		  {
 			  Stop();
+			  GameOverText.Visibility = Visibility.Visible;
+			  PlayAgainText.Visibility = Visibility.Visible;
+			  PlayAgainText.IsEnabled = true;
 		  }
 	  }
 
