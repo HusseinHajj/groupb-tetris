@@ -111,6 +111,7 @@ namespace Tetris
 
 				AddShapeToBoard(GetCurrentShape() as Shape);
 				this.TestRowsDone();
+				this.TestGameDone();
 
                 }
             }
@@ -340,6 +341,11 @@ namespace Tetris
                //row--;
            }
        }
+
+	  private void TestGameDone()
+	  {
+		  //throw new NotImplementedException();
+	  }
 
 	  private void VisuallyRemoveRow(int row)
 	  {
