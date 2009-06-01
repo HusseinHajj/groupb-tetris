@@ -53,9 +53,9 @@ namespace Tetris
             Canvas.SetRight(Board, Board.Width);
 
             tetrisBoard = new Rectangle[(int)(Board.Height / 20d), (int)(Board.Width / 20d)];
-            Canvas.SetZIndex(PauseStatus, 2);
-            Canvas.SetZIndex(PlayAgainText, 2);
-            Canvas.SetZIndex(GameOverText, 2);
+            Canvas.SetZIndex(PauseStatus, 5);
+            Canvas.SetZIndex(PlayAgainText, 5);
+            Canvas.SetZIndex(GameOverText, 5);
 
             gameTimer.Interval = TimeSpan.FromMilliseconds(50);
             gameTimer.Tick += new EventHandler(gameTimer_Tick);
@@ -414,9 +414,30 @@ namespace Tetris
             Pause(PauseStatus);
         }
 
+        void Reset()
+        {
+            Board.Children.Clear();
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    tetrisBoard[i, j] = null;
+                }
+            }
+            PlayAgainText.Visibility = Visibility.Collapsed;
+            PlayAgainText.IsEnabled = false;
+            gameOverStatus = false;
+            GameOverText.Visibility = Visibility.Collapsed;
+            Score = 0;
+            Level = 0;
+            LevelUp = 0;
+        }
+
+
         private void PlayAgainText_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            Reset();
+            Start();
         }
     }
 }
