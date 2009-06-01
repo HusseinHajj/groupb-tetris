@@ -22,8 +22,8 @@ namespace Tetris
     public partial class TetrisWindow : Window
     {
         public static readonly DependencyProperty ScoreProperty = DependencyProperty.Register("Score", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
-        public static readonly DependencyProperty LevelProperty = DependencyProperty.Register("Level", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(1));
-        public static readonly DependencyProperty LevelUpProperty = DependencyProperty.Register("LevelUp", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(10));
+        public static readonly DependencyProperty LevelProperty = DependencyProperty.Register("Level", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
+        public static readonly DependencyProperty LevelUpProperty = DependencyProperty.Register("LevelUp", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
         bool activePiece = false;
         public int Score
         {
@@ -124,7 +124,7 @@ namespace Tetris
             //Add level
             Level += 1;
             //set new levelUp property
-            LevelUp = 2 * Level;
+            LevelUp = 5 * Level;
             //add to score
             Score += 100 * Level;
         }
