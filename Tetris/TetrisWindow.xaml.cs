@@ -93,13 +93,13 @@ namespace Tetris
             {
                 if (!HitTest(Direction.Down))
                 {
-                    int interval = (this.Level) * 5;
+                    int interval = (this.Level) * 2 + 3;
                     interval += (keyDownPressed) ? (3 / 2) * interval : 0;
-                    for (int i = 0; i < interval / 5; i++)
+                    for (int i = 0; i < interval / 1; i++)
                     {
                         if(!HitTest(Direction.Down))
                         {
-                            currentY += 5;
+                            currentY += 1;
                             Canvas.SetTop(Board.Children[Board.Children.Count - 1], currentY);
                         }
                     }
