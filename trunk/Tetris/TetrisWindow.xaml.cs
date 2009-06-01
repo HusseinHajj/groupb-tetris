@@ -53,6 +53,9 @@ namespace Tetris
             Canvas.SetRight(Board, Board.Width);
 
             tetrisBoard = new Rectangle[(int)(Board.Height / 20d), (int)(Board.Width / 20d)];
+            Canvas.SetZIndex(PauseStatus, 2);
+            Canvas.SetZIndex(PlayAgainText, 2);
+            Canvas.SetZIndex(GameOverText, 2);
 
             gameTimer.Interval = TimeSpan.FromMilliseconds(50);
             gameTimer.Tick += new EventHandler(gameTimer_Tick);
@@ -386,11 +389,13 @@ namespace Tetris
             {
                 Stop();
                 pauseStatus.Visibility = Visibility.Visible;
+                pauseStatus.IsEnabled = true;
             }
             else if (!gameOverStatus)
             {
                 Start();
                 pauseStatus.Visibility = Visibility.Hidden;
+                pauseStatus.IsEnabled = false;
             }
         }
 
@@ -399,6 +404,16 @@ namespace Tetris
         {
             if (e.Key == Key.Down)
                 keyDownPressed = false;
+        }
+
+        private void PauseStatus_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Pause(PauseStatus);
+        }
+
+        private void PlayAgainText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
