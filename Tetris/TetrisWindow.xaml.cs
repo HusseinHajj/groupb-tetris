@@ -25,6 +25,7 @@ namespace Tetris
         public static readonly DependencyProperty LevelProperty = DependencyProperty.Register("Level", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
         public static readonly DependencyProperty LevelUpProperty = DependencyProperty.Register("LevelUp", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
         bool activePiece = false;
+        bool gameOverStatus = false;
         public int Score
         {
             get { return (int)GetValue(ScoreProperty); }
@@ -379,7 +380,7 @@ namespace Tetris
                 Stop();
                 pauseStatus.Visibility = Visibility.Visible;
             }
-            else // - This will be used when we have a game over status - if (!gameOverStatus)
+            else if (!gameOverStatus)
             {
                 Start();
                 pauseStatus.Visibility = Visibility.Hidden;
