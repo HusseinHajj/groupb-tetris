@@ -21,13 +21,16 @@
 		</Grid.ColumnDefinitions>
 		<Border CornerRadius="5" BorderBrush="Blue" BorderThickness="10">
             <Canvas Width="200" Height="400" x:Name="Board" ClipToBounds="True">
-                <Label Name="GameOverText" Content="Game Over" Canvas.Top="200" Canvas.Left="15" FontFamily="Impact"
-                       FontSize="36" Foreground="Lime" Visibility="Collapsed" />
+                <Label Name="GameOverText" Content="Game Over" Canvas.Top="200" Canvas.Left="0" FontFamily="Impact"
+                       FontSize="36" Foreground="Lime" HorizontalContentAlignment="Center"
+                       Visibility="Collapsed" Background="Black" Opacity="2" Width="200" />
                 <Label Name="PlayAgainText" Content="Play Again?" MouseDown="PlayAgainText_MouseDown" 
-                       Canvas.Top="250" Canvas.Left="10" FontFamily="Consolas"
-                       FontSize="30" Foreground="Lime" IsEnabled="False" Visibility="Collapsed" Cursor="Hand" />
+                       Canvas.Top="250" Canvas.Left="0" FontFamily="Consolas" Width="200" HorizontalContentAlignment="Center"
+                       FontSize="30" Foreground="Lime" IsEnabled="False" Visibility="Collapsed" Cursor="Hand"
+                       Background="Black" Opacity="2"/>
                 <TextBlock x:Name="PauseStatus" Canvas.Top="170" MouseDown="PauseStatus_MouseDown" 
                            Canvas.Left="50" IsEnabled="False"  FontSize="30" Foreground="Lime"
+                           Background="Black" Opacity="2" 
                            Visibility="Collapsed">Paused</TextBlock>
             </Canvas>
         </Border>
