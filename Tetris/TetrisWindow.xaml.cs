@@ -288,7 +288,7 @@ namespace Tetris
         {
             int top = ShapeTopIndex(shape);
             int left = ShapeLeftIndex(shape);
-            return left >= 0 && top + shape.Arrangement.GetLength(0) <= tetrisBoard.GetLength(0) && left + shape.Arrangement.GetLength(1) <= tetrisBoard.GetLength(1);
+            return left >= 0 && top >= 0 && top + shape.Arrangement.GetLength(0) <= tetrisBoard.GetLength(0) && left + shape.Arrangement.GetLength(1) <= tetrisBoard.GetLength(1);
         }
 
 	   private bool HitTest(Direction direction)
