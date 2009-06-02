@@ -73,7 +73,6 @@ namespace Tetris
         }
 
         UIElement shapeToAdd;
-        int currentY = 0;
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
@@ -90,6 +89,7 @@ namespace Tetris
                 shapeToAdd = nextShape;
                 Canvas.SetLeft(shapeToAdd, 100);
                 Board.Children.Add(shapeToAdd);
+			 Canvas.SetTop(shapeToAdd, 0 - ((UserControl)shapeToAdd).Height);
                 GenerateNewShape();
                 activePiece = true;
             }
@@ -103,14 +103,13 @@ namespace Tetris
                     {
                         if(!HitTest(Direction.Down))
                         {
-                            currentY += 1;
-                            Canvas.SetTop(Board.Children[Board.Children.Count - 1], currentY);
+                            double currentY = Canvas.GetTop(GetCurrentShape()) + 1;
+                            Canvas.SetTop(GetCurrentShape(), currentY);
                         }
                     }
                 }
                 else
                 {
-                    currentY = 0;
                     activePiece = false;
 
 				AddShapeToBoard(GetCurrentShape() as Shape);
@@ -278,7 +277,8 @@ namespace Tetris
 					 rect.Height = 20d;
 					 Canvas.SetLeft(rect, 20d * (left + j));
 					 Canvas.SetTop(rect, 20d * (top + i));
-					 tetrisBoard[top + i, left + j] = rect;
+					 if(top + i >= 0)
+						 tetrisBoard[top + i, left + j] = rect;
 				 }
                 }
             }
@@ -288,7 +288,7 @@ namespace Tetris
         {
             int top = ShapeTopIndex(shape);
             int left = ShapeLeftIndex(shape);
-            return left >= 0 && top >= 0 && top + shape.Arrangement.GetLength(0) <= tetrisBoard.GetLength(0) && left + shape.Arrangement.GetLength(1) <= tetrisBoard.GetLength(1);
+            return left >= 0 && top + shape.Arrangement.GetLength(0) <= tetrisBoard.GetLength(0) && left + shape.Arrangement.GetLength(1) <= tetrisBoard.GetLength(1);
         }
 
 	   private bool HitTest(Direction direction)
@@ -304,11 +304,11 @@ namespace Tetris
 				   {
 					   for (int j = 0; j < shape.Arrangement.GetLength(0); j++)
 					   {
-						   if (ShapeExists(shape.Arrangement, i, j))
+						   if (ShapeExists(shape.Arrangement, i, j) && top + j >= 0)
 						   {
 							   if ((direction == Direction.Down && ShapeExists(tetrisBoard, left + i, top + j + 1)) ||
-								  (direction == Direction.Left && ShapeExists(tetrisBoard, left - 1, top + j)) ||
-								  (direction == Direction.Right && ShapeExists(tetrisBoard, left + i + 1, top + j)))
+								  (direction == Direction.Left && ShapeExists(tetrisBoard, left - 1, top + j + 1)) ||
+								  (direction == Direction.Right && ShapeExists(tetrisBoard, left + i + 1, top + j + 1)))
 								   return true;
 						   }
 					   }
