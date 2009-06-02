@@ -416,7 +416,8 @@ namespace Tetris
 
         void Reset()
         {
-            Board.Children.Clear();
+            Board.Children.RemoveRange(3, Board.Children.Count - 3);
+
             for (int i = 0; i < 20; i++)
             {
                 for (int j = 0; j < 10; j++)
