@@ -20,7 +20,7 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Border CornerRadius="5" BorderBrush="Blue" BorderThickness="10">
-            <Canvas Width="200" Height="400" x:Name="Board">
+            <Canvas Width="200" Height="400" x:Name="Board" ClipToBounds="True">
                 <Label Name="GameOverText" Content="Game Over" Canvas.Top="200" Canvas.Left="15" FontFamily="Impact"
                        FontSize="36" Foreground="Lime" Visibility="Collapsed" />
                 <Label Name="PlayAgainText" Content="Play Again?" MouseDown="PlayAgainText_MouseDown" 
