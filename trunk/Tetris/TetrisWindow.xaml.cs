@@ -51,21 +51,14 @@ namespace Tetris
         Rectangle[,] tetrisBoard;
         DispatcherTimer gameTimer = new DispatcherTimer();
         MediaPlayer me = new MediaPlayer();
+	   MediaPlayer game = new MediaPlayer();
 
         public TetrisWindow()
         {
             InitializeComponent();
 
-		  DispatcherTimer timer = new DispatcherTimer();
-		  timer.Tick += delegate
-		  {
-			  timer.Stop();
-			  MediaPlayer media = new MediaPlayer();
-			  media.Open(new Uri("Sounds/Music.mp3", UriKind.Relative));
-			  media.Play();
-			  media.MediaEnded += delegate { timer.Start(); };
-		  };
-		  timer.Start();
+		  game.Open(new Uri("Sounds/Music.mp3", UriKind.Relative));
+		  game.Play();
 		  
             Canvas.SetLeft(Board, 0);
             Canvas.SetRight(Board, Board.Width);
