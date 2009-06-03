@@ -24,6 +24,7 @@ namespace Tetris
         public static readonly DependencyProperty ScoreProperty = DependencyProperty.Register("Score", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
         public static readonly DependencyProperty LevelProperty = DependencyProperty.Register("Level", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
         public static readonly DependencyProperty LevelUpProperty = DependencyProperty.Register("LevelUp", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
+        public static readonly DependencyProperty TotalRowsProperty = DependencyProperty.Register("TotalRows", typeof(int), typeof(TetrisWindow), new UIPropertyMetadata(0));
         bool activePiece = false;
         bool gameOverStatus = false;
         public int Score
@@ -40,6 +41,11 @@ namespace Tetris
         {
             get { return (int)GetValue(LevelUpProperty); }
             set { SetValue(LevelUpProperty, value); }
+        }
+        public int TotalRows
+        {
+            get { return (int)GetValue(TotalRowsProperty); }
+            set { SetValue(TotalRowsProperty, value); }
         }
 
         Rectangle[,] tetrisBoard;
@@ -350,6 +356,7 @@ namespace Tetris
                if (rowDone == true)
                {
                    LevelUp -= 1;
+                   TotalRows += 1;
                    Score += 50 + (50 * Level);
 
 			        VisuallyRemoveRow(row);
@@ -444,6 +451,7 @@ namespace Tetris
             Score = 0;
             Level = 0;
             LevelUp = 0;
+            TotalRows = 0;
         }
 
 
