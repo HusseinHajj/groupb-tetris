@@ -19,6 +19,19 @@
 			<ColumnDefinition Width="25"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
+		<MediaElement Name="myMediaElement" Visibility="Collapsed">
+			<MediaElement.Triggers>
+				<EventTrigger RoutedEvent="MediaElement.Loaded">
+					<EventTrigger.Actions>
+						<BeginStoryboard>
+							<Storyboard>
+								<MediaTimeline Source="Sounds/Music.mp3" Storyboard.TargetName="myMediaElement" RepeatBehavior="Forever" />
+							</Storyboard>
+						</BeginStoryboard>
+					</EventTrigger.Actions>
+				</EventTrigger>
+			</MediaElement.Triggers>
+		</MediaElement>
 		<Border CornerRadius="5" BorderBrush="Blue" BorderThickness="10">
             <Canvas Width="200" Height="400" x:Name="Board" ClipToBounds="True">
                 <Label Name="GameOverText" Content="Game Over" Canvas.Top="200" Canvas.Left="0" FontFamily="Impact"
