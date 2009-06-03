@@ -44,11 +44,12 @@ namespace Tetris
 
         Rectangle[,] tetrisBoard;
         DispatcherTimer gameTimer = new DispatcherTimer();
+       // MediaElement m = new MediaElement();
 
         public TetrisWindow()
         {
             InitializeComponent();
-
+            //m.Source = new Uri("/Sounds/Music.mp3");
             Canvas.SetLeft(Board, 0);
             Canvas.SetRight(Board, Board.Width);
 
