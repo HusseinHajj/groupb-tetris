@@ -50,7 +50,7 @@ namespace Tetris
 
         Rectangle[,] tetrisBoard;
         DispatcherTimer gameTimer = new DispatcherTimer();
-
+        MediaPlayer me = new MediaPlayer();
 
         public TetrisWindow()
         {
@@ -277,6 +277,8 @@ namespace Tetris
 
         private void AddShapeToBoard(Shape shape)
         {
+            me.Open(new Uri("Sounds/HitSound.mp3", UriKind.Relative));
+            me.Play();
             int top = ShapeTopIndex(shape);
             int left = ShapeLeftIndex(shape);
 		  Canvas.SetLeft(shape as UIElement, left * 20d);
