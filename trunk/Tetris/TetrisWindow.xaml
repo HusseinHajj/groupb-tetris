@@ -49,6 +49,8 @@
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
 				</Grid.RowDefinitions>
 				<Label Grid.Row="0" Content="Next"/>
 				<Label Grid.Row="3" Content="Score"/>
@@ -57,7 +59,11 @@
 				<TextBlock Grid.Row="7" Text="{Binding Path=LevelUp}"/>
 				<Label Grid.Row="9" Content="Level"/>
 				<TextBlock Grid.Row="10" Text="{Binding Path=Level}"/>
-				
+                <Label Grid.Row="12" Content="Cleared" />
+                <TextBlock Grid.Row="13">
+                    <TextBlock Text="{Binding Path=TotalRows}" />
+                    <TextBlock Text=" rows" />
+                </TextBlock>
             </Grid>
 		</Border>
 	</Grid>
