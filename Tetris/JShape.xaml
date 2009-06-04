@@ -12,9 +12,9 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Rectangle Grid.Column="1" Fill="Blue"  Stroke="Black" />
-        <Rectangle Grid.Column="0" Grid.Row="2" Fill="Blue"  Stroke="Black" />
-        <Rectangle Grid.Column="1" Grid.Row="2" Fill="Blue"  Stroke="Black" />
-        <Rectangle Grid.Column="1" Grid.Row="1" Fill="Blue"  Stroke="Black" />
+        <Rectangle Grid.Column="1" Fill="White"  Stroke="Black" />
+        <Rectangle Grid.Column="0" Grid.Row="2" Fill="White"  Stroke="Black" />
+        <Rectangle Grid.Column="1" Grid.Row="2" Fill="White"  Stroke="Black" />
+        <Rectangle Grid.Column="1" Grid.Row="1" Fill="White"  Stroke="Black" />
     </Grid>
 </UserControl>
