@@ -37,11 +37,16 @@ namespace Tetris
             get { return (int)GetValue(LevelProperty); }
             set { SetValue(LevelProperty, value); }
         }
-        public int LevelUp
-        {
-            get { return (int)GetValue(LevelUpProperty); }
-            set { SetValue(LevelUpProperty, value); }
-        }
+	   public int LevelUp
+	   {
+		   get { return (int)GetValue(LevelUpProperty); }
+		   set
+		   {
+			   SetValue(LevelUpProperty, value);
+			   if (LevelUp == 0)
+				   StartNewLevel();
+		   }
+	   }
         public int TotalRows
         {
             get { return (int)GetValue(TotalRowsProperty); }
@@ -57,6 +62,7 @@ namespace Tetris
         {
             InitializeComponent();
 
+		  LevelUp = 0;
 		  game.Open(new Uri("Sounds/Music.mp3", UriKind.Relative));
 		  game.Play();
 		  
@@ -87,8 +93,6 @@ namespace Tetris
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            if (LevelUp <= 0)
-                StartNewLevel();
             if (!activePiece)
             {
                 if (!nextShapeExists)
