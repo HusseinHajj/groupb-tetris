@@ -5,12 +5,12 @@
 	Title="In communist Russia, Tetris plays you!" SizeToContent="WidthAndHeight" ResizeMode="NoResize" KeyDown="Board_KeyDown" KeyUp="Board_KeyUp" >
 	<Window.Resources>
 		<Style TargetType="{x:Type Label}">
-			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Foreground" Value="Red"/>
 			<Setter Property="HorizontalAlignment" Value="Center"/>
 			<Setter Property="FontWeight" Value="Bold"/>
 		</Style>
 		<Style TargetType="{x:Type TextBlock}">
-			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Foreground" Value="Red"/>
 		</Style>
 	</Window.Resources>
 	<Grid Background="Gold">
@@ -55,18 +55,18 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
 				</Grid.RowDefinitions>
-				<Label Grid.Row="0" Content="Next" Foreground="Red"/>
-				<Label Grid.Row="3" Content="Score" Foreground="Red"/>
-				<TextBlock Grid.Row="4" Text="{Binding Path=Score}" Foreground="Red"/>
+				<Label Grid.Row="0" Content="Next"/>
+				<Label Grid.Row="3" Content="Score"/>
+				<TextBlock Grid.Row="4" Text="{Binding Path=Score}"/>
 				<Label Grid.Row="6" Content="Level Up" Foreground="Red"/>
-				<TextBlock Grid.Row="7" Text="{Binding Path=LevelUp}" Foreground="Red"/>
-				<Label Grid.Row="9" Content="Level" Foreground="Red"/>
-				<TextBlock Grid.Row="10" Text="{Binding Path=Level}" Foreground="Red"/>
-                <Label Grid.Row="12" Content="Cleared" Foreground="Red" />
-                <TextBlock Grid.Row="13" Foreground="Red">
-                    <TextBlock Text="{Binding Path=TotalRows}" />
-                    <TextBlock Text=" rows" />
-                </TextBlock>
+				<TextBlock Grid.Row="7" Text="{Binding Path=LevelUp}"/>
+				<Label Grid.Row="9" Content="Level" />
+				<TextBlock Grid.Row="10" Text="{Binding Path=Level}"/>
+				<Label Grid.Row="12" Content="Cleared"/>
+				<TextBlock Grid.Row="13">
+					<TextBlock Text="{Binding Path=TotalRows}" />
+					<TextBlock Text=" rows" />
+				</TextBlock>
             </Grid>
 		</Border>
 	</Grid>
