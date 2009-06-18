@@ -55,8 +55,8 @@ namespace Tetris
 
         Rectangle[,] tetrisBoard;
         DispatcherTimer gameTimer = new DispatcherTimer();
-        MediaPlayer me = new MediaPlayer();
-	   MediaPlayer game = new MediaPlayer();
+	   MediaPlayer me = new MediaPlayer() { Volume = 0 };
+	   MediaPlayer game = new MediaPlayer() { Volume = 0 };
 
         public TetrisWindow()
         {
