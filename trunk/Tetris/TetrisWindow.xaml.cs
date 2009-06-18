@@ -55,16 +55,16 @@ namespace Tetris
 
         Rectangle[,] tetrisBoard;
         DispatcherTimer gameTimer = new DispatcherTimer();
-	   MediaPlayer me = new MediaPlayer() { Volume = 0 };
-	   MediaPlayer game = new MediaPlayer() { Volume = 0 };
+	   //MediaPlayer me = new MediaPlayer();
+	   //MediaPlayer game = new MediaPlayer();
 
         public TetrisWindow()
         {
             InitializeComponent();
 
 		  LevelUp = 0;
-		  game.Open(new Uri("Sounds/Music.mp3", UriKind.Relative));
-		  game.Play();
+		  //game.Open(new Uri("Sounds/Music.mp3", UriKind.Relative));
+		  //game.Play();
 		  
             Canvas.SetLeft(Board, 0);
             Canvas.SetRight(Board, Board.Width);
@@ -274,8 +274,8 @@ namespace Tetris
 
         private void AddShapeToBoard(Shape shape)
         {
-            me.Open(new Uri("Sounds/HitSound.mp3", UriKind.Relative));
-            me.Play();
+            //me.Open(new Uri("Sounds/HitSound.mp3", UriKind.Relative));
+            //me.Play();
             int top = ShapeTopIndex(shape);
             int left = ShapeLeftIndex(shape);
 		  Canvas.SetLeft(shape as UIElement, left * 20d);
